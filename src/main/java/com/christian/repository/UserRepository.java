@@ -1,37 +1,39 @@
 package com.christian.repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.christian.dao.UserDao;
 import com.christian.models.User;
 
-public class UserRepository {
-
-    private static List<User> users = new ArrayList<>();
-
+public class UserRepository implements UserRepositoryImpl{
     
-    static {
-        
-        users.add(new User("admin", "admin@example.com", "1234", true));
-        
-        users.add(new User("cliente", "cliente@example.com", "1234", false));
+    private final UserDao userDao;
+
+    public UserRepository() {
+        this.userDao = new UserDao();
     }
 
-    
-    public static void add(User user) {
-        users.add(user);
+    @Override
+    public User findById(int id) {
+        return userDao.findById(id);
     }
 
-    
-    public static User findByEmail(String email) {
-        for (User user : users) {
-            if (user.getEmail().equalsIgnoreCase(email)) {
-                return user;
-            }
-        }
-        return null;
+    @Override
+    public User findByEmail(String email) {
+        return userDao.findByEmail(email);
     }
 
-    public static List<User> getAllUsers() {
-        return new ArrayList<>(users);
+    @Override
+    public void save(User user) {
+        userDao.save(user);
     }
+
+    @Override
+    public void update(User user) {
+        userDao.update(user);
+    }
+
+    @Override
+    public void delete(int id) {
+        userDao.delete(id);
+    }
+
 }

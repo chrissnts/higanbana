@@ -16,11 +16,7 @@ public class Anime {
     private List<Genre> genres = new ArrayList<>();
     private List<Review> reviews = new ArrayList<>();
 
-    public Anime() {
-    }
-
-    public Anime(Long id, int episodesCount, String title, String synopsis, String imageUrl, double rating,
-            LocalDate releaseDate, Studio studio, List<Genre> genres, List<Review> reviews) {
+    public Anime(Long id, int episodesCount, String title, String synopsis, String imageUrl, double rating, LocalDate releaseDate, Studio studio, List<Genre> genres, List<Review> reviews) {
         this.id = id;
         this.episodesCount = episodesCount;
         this.title = title;
@@ -31,6 +27,9 @@ public class Anime {
         this.studio = studio;
         this.genres = genres != null ? genres : new ArrayList<>();
         this.reviews = reviews != null ? reviews : new ArrayList<>();
+    }
+    
+    public Anime() {
     }
 
     

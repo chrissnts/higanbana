@@ -1,86 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Higanbana - Login</title>
-  <link rel="icon" type="image/png" href="/img/tokyoFlower.jpeg" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles/style.css" />
+  <title>Higanbana - Rate Anime and Share Opinions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/img/tokyoFlower.jpeg" />
+  <link rel="stylesheet" href="/styles/style.css" />
 </head>
 
 <body>
-  <section class="h-100">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-xl-10">
-          <div class="card rounded-4 text-white">
-            <div class="row g-0">
-            
-              <div class="col-lg-6">
-                <div class="card-body p-md-5 mx-md-4">
-                  <div class="text-center mb-4">
-                    <img src="/img/tokyoFlower.jpeg" alt="Higanbana Logo" class="logo" />
-                    <h4 class="mt-3 mb-5 pb-1">
-                      Welcome to <strong>Higanbana</strong>
-                    </h4>
-                  </div>
+  <div class="vertical-text d-none d-md-block">
+    Higanbana - Rate Anime and Share Opinions
+  </div>
 
-                  <div id="login-error" class="alert alert-danger d-none" role="alert">
-                    E-mail or Password incorrect.
-                  </div>
+  <nav class="navbar navbar-expand-lg position-absolute top-0 start-0 end-0 z-3 p-4">
+    <div class="container">
+      <a class="navbar-brand me-auto nav-logo" href="#">Higanbana</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-                  <form id="login-form" method="POST" action="/login">
-                    <div class="mb-4">
-                      <label for="email" class="form-label text-white">E-mail</label>
-                      <input type="email" name="email" id="email"
-                        class="form-control bg-transparent text-white border-bottom border-white rounded-0"
-                        placeholder="E-mail" required />
-                    </div>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/login">SIGN IN</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">ABOUT US</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-                    <div class="mb-4">
-                      <label for="password" class="form-label text-white">Password</label>
-                      <input type="password" name="password" id="password"
-                        class="form-control bg-transparent text-white border-bottom border-white rounded-0"
-                        placeholder="Password" required />
-                    </div>
+  <div class="main-wrapper d-flex justify-content-center align-items-center vh-100 p-3">
 
-                      <#if error??>
-                        <div class="alert alert-danger" role="alert">
-                          ${error}
-                        </div>
-                      </#if>
+    <div class="hero-card shadow-lg">
 
-                      <div class="text-center pt-1 mb-5 pb-1">
-                        <button type="submit" class="btn btn-danger btn-block fa-lg mb-3">
-                          Login
-                        </button>
-                      </div>
+      <div class="row g-0 h-100 hero-section">
 
-                      <div class="d-flex align-items-center justify-content-between mb-4">
-                        <p class="mb-0 text-white">Don't have an account?</p>
-                        <a href="/register" class="btn btn-danger">Register</a>
-                      </div>
-                  </form>
+        <div class="col-md-6 d-none d-md-flex hero-image-col">
+          <img src="/img/wallpaper.jpeg" alt="Hero Wallpaper" class="hero-image" />
+        </div>
 
-                </div>
-              </div>
-
-              <div class="col-lg-6 d-none d-lg-flex justify-content-center align-items-center gradient-custom-2">
-                <p class="higanbana-text text-white display-1">ヒガンバナ</p>
-              </div>
-
-            </div>
+        <div class="col-12 col-md-6 hero-content-col d-flex align-items-center justify-content-center">
+          <div class="content-wrapper p-4 p-lg-5 text-center text-md-start"> 
+            <h1 class="hero-title mb-4">
+              <span class="jp-text d-block">ヒガンバナ</span>
+              Higanbana
+            </h1>
+            <p class="hero-subtitle mb-5 mx-auto mx-md-0">
+              Share your thoughts and rate the anime series you love—let the community know your favorites!
+            </p>
+            <a href="/register" class="btn btn-get-started">
+              Get Started &nbsp; →
+            </a>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

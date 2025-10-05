@@ -91,7 +91,7 @@ public class Review {
 
     @Override
     public String toString() {
-        return "Review [id=" + id + ", anime=" + anime.getTitle() + ", user=" + user.getuserName() +
+        return "Review [id=" + id + ", anime=" + anime.getTitle() + ", user=" + user.getUserName() +
                 ", rating=" + rating + ", createdAt=" + createdAt + "]";
     }
 

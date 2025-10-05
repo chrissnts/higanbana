@@ -64,7 +64,7 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comment [id=" + id + ", user=" + (user != null ? user.getuserName() : "null") +
+        return "Comment [id=" + id + ", user=" + (user != null ? user.getUserName() : "null") +
                 ", content=" + content + ", createdAt=" + createdAt + "]";
     }
 

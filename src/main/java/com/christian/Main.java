@@ -11,7 +11,7 @@ public class Main {
         AppConfig appConfig = new AppConfig();
 
         routes.registerRoutes(appConfig.startApp());
-        
 
     }
+
 }

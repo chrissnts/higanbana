@@ -37,9 +37,10 @@
           <li class="nav-item me-3">
             <a class="nav-link text-uppercase fw-bold text-white" href="/watchlist">WATCHLIST</a>
           </li>
-          <li class="nav-item me-3">
-            <a class="nav-link text-white" href="/search"><i class="bi bi-search"></i></a>
-          </li>
+          <form class="d-flex me-4" role="search">
+              <input class="form-control me-2 border-0 border-bottom" type="search" placeholder="SEARCH"
+                aria-label="Search" style="width: 150px; background: none;">
+            </form>
           <li class="nav-item me-3">
             <button class="btn btn-success btn-sm px-3 fw-bold">+ LOG</button>
           </li>
@@ -47,7 +48,8 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="navbarUser"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="/img/profile.jpeg" class="rounded-circle me-2" alt="Avatar" width="30" height="30" />
+              <#--  arrumar para mostar a foto de perfil do user  -->
+              <img src="${user.profileImage}" class="rounded-circle me-2" alt="Avatar" width="30" height="30" />
               <span class="text-uppercase fw-bold text-white">${user.userName}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">

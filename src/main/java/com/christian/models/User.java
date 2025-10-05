@@ -10,7 +10,8 @@ public class User {
     private String userName;
     private String email;
     private String password;
-    private boolean admin = false;
+    private Role role;
+    private String profileImage = "/img/profileDefault.jpeg";
     private List<Anime> watchedAnimes = new ArrayList<>();
     private List<Anime> watchlistAnime = new ArrayList<>();
     private List<Review> reviews = new ArrayList<>();
@@ -18,11 +19,29 @@ public class User {
     private List<User> friends = new ArrayList<>();
     private List<Anime> favoriteAnimes = new ArrayList<>();
 
-    public User(String userName, String email, String password, boolean admin) {
+    public User(Long id, String userName, String email, String password, Role role, List<Anime> watchedAnimes, List<Anime> watchlistAnime,List<Review> reviews, List<Comment> comments,List<User> friends, List<Anime> favoriteAnimes) {
+        this.id = id;
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.admin = admin;
+        this.role = role;
+        this.watchedAnimes = watchedAnimes;
+        this.watchlistAnime = watchlistAnime;
+        this.reviews = reviews;
+        this.comments = comments;
+        this.friends = friends;
+        this.favoriteAnimes = favoriteAnimes;
+
+    }
+
+    public User(String userName, String email, String password, Role role) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User() {
     }
 
     public Long getId() {
@@ -33,11 +52,11 @@ public class User {
         this.id = id;
     }
 
-    public String getuserName() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setuserName(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
@@ -57,12 +76,20 @@ public class User {
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public Role getRole() {
+        return role;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
     public List<Anime> getWatchedAnimes() {
@@ -89,7 +116,6 @@ public class User {
         return Collections.unmodifiableList(favoriteAnimes);
     }
 
-
     public void addFriend(User friend) {
         this.friends.add(friend);
     }
@@ -106,15 +132,8 @@ public class User {
         this.watchlistAnime.add(anime);
     }
 
-
-    
-
-
-
-
-
     @Override
     public String toString() {
-        return "User [id=" + id + ", userName=" + userName + ", email=" + email + ", isAdmin=" + admin + "]";
+        return "User [id=" + id + ", userName=" + userName + ", email=" + email + ", role=" + role + "]";
     }
 }

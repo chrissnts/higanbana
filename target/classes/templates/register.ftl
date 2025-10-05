@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/img/tokyoFlower.jpeg" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/login.css" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -52,14 +52,6 @@
                                                 class="form-control bg-transparent text-white border-bottom border-white rounded-0"
                                                 placeholder="Password" required />
                                         </div>
-
-                                        <div class="mb-4">
-                                            <label for="confirmPassword" class="form-label text-white">Confirm Password</label>
-                                            <input type="password" name="confirmPassword" id="confirmPassword"
-                                                class="form-control bg-transparent text-white border-bottom border-white rounded-0"
-                                                placeholder="Confirm password" required />
-                                        </div>
-
                                          <#if error??>
                                          <div class="alert alert-danger" role="alert">
                                                 ${error}
@@ -74,7 +66,7 @@
 
                                         <div class="d-flex align-items-center justify-content-between mb-4">
                                             <p class="mb-0 text-white">Already have an account?</p>
-                                            <a href="/" class="btn btn-danger">Login</a>
+                                            <a href="/login" class="btn btn-danger">Login</a>
                                         </div>
                                     </form>
                                 </div>
