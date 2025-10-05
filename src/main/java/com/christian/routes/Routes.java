@@ -1,17 +1,31 @@
 package com.christian.routes;
 
-import com.christian.controllers.IndexController;
+import com.christian.controllers.*;
 import io.javalin.Javalin;
 
 public class Routes {
-    private IndexController indexController;
+    private UserController userController;
 
     public Routes() {
-        this.indexController = new IndexController();
+        this.userController = new UserController();
     }
 
     public void registerRoutes(Javalin app) {
-        app.get("/", indexController.get);
+
+        app.get("/", userController.get);
+        app.post("/login", userController.post); 
+
+        app.get("/register", userController.registerGet);
+        app.post("/register", userController.registerPost);
+
+        app.get("/client/home", userController.clientHome);
+
         
+
+        // app.post("/logout", ctx -> {
+        // ctx.sessionAttribute("currentUser", null);
+        // ctx.redirect("/");
+        // });
+
     }
 }

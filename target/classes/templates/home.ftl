@@ -5,10 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Higanbana - Home</title>
-  <link rel="icon" type="image/png" href="assets/images/tokyoFlower.jpeg" />
+  <link rel="icon" type="image/png" href="/img/tokyoFlower.jpeg" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/home.css" />
+  <link rel="stylesheet" href="/styles/home.css" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
@@ -17,7 +17,7 @@
   <nav class="navbar navbar-expand-lg py-2 px-3">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center text-white" href="#">
-        <img class="logo" src="assets/images/tokyoFlower.jpeg" alt="Logo" />
+        <img class="logo" src="/img/tokyoFlower.jpeg" alt="Logo" />
         <strong class="ms-2">Higanbana</strong>
       </a>
 
@@ -29,16 +29,16 @@
       <div class="collapse navbar-collapse" id="navbarAnime">
         <ul class="navbar-nav ms-auto align-items-center mb-2 mb-lg-0">
           <li class="nav-item me-3">
-            <a class="nav-link text-uppercase fw-bold text-white" href="#">ANIMES</a>
+            <a class="nav-link text-uppercase fw-bold text-white" href="/animes">ANIMES</a>
           </li>
           <li class="nav-item me-3">
-            <a class="nav-link text-uppercase fw-bold text-white" href="#">LISTS</a>
+            <a class="nav-link text-uppercase fw-bold text-white" href="/lists">LISTS</a>
           </li>
           <li class="nav-item me-3">
-            <a class="nav-link text-uppercase fw-bold text-white" href="#">WATCHLIST</a>
+            <a class="nav-link text-uppercase fw-bold text-white" href="/watchlist">WATCHLIST</a>
           </li>
           <li class="nav-item me-3">
-            <a class="nav-link text-white" href="#"><i class="bi bi-search"></i></a>
+            <a class="nav-link text-white" href="/search"><i class="bi bi-search"></i></a>
           </li>
           <li class="nav-item me-3">
             <button class="btn btn-success btn-sm px-3 fw-bold">+ LOG</button>
@@ -47,18 +47,18 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="navbarUser"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="assets/images/profile.jpeg" class="rounded-circle me-2" alt="Avatar" width="30" height="30" />
-              <span class="text-uppercase fw-bold text-white">CHRISSNTS</span>
+              <img src="/img/profile.jpeg" class="rounded-circle me-2" alt="Avatar" width="30" height="30" />
+              <span class="text-uppercase fw-bold text-white">${user.userName}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><a class="dropdown-item" href="favorites.html">Favorites</a></li>
-              <li><a class="dropdown-item" href="#">Activity</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="/profile">Profile</a></li>
+              <li><a class="dropdown-item" href="/favorites">Favorites</a></li>
+              <li><a class="dropdown-item" href="/activity">Activity</a></li>
+              <li><a class="dropdown-item" href="/settings">Settings</a></li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
-              <li><a class="dropdown-item" href="#">Sign Out</a></li>
+              <li><a class="dropdown-item" href="/logout">Sign Out</a></li>
             </ul>
           </li>
         </ul>
@@ -67,7 +67,7 @@
   </nav>
 
   <div class="container text-center mt-4">
-    <h2>Welcome Back, <a href="#" class="text-info">chrissnts</a></h2>
+    <h2>Welcome Back, <a href="/profile" class="text-info">${user.userName}</a></h2>
     <p class="text-muted">Look what you're friends watching...</p>
   </div>
 
@@ -127,16 +127,6 @@
     </div>
     </div>
   </div>
-
-
-  <!-- <div class="container mt-5 mb-5">
-    <h5>POPULAR WITH FRIENDS</h5>
-    <hr>
-    <div class="scrolling-wrapper mt-2 d-flex flex-row gap-4 overflow-auto px-3 py-2 bg-gradient text-black">
-      <div class="d-flex flex-column align-items-center p-2 rounded shadow-sm bg-light">
-        <img class="anime-card rounded" src="https://m.media-amazon.com/images/I/91aGIfy7M+L.jpg" alt="Anime Poster"/>
-      </div>
-    </div> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
