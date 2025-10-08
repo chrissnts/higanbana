@@ -26,17 +26,14 @@
                 
                 <div class="col-12 col-lg-6">
                     <div class="p-4 p-md-5">
-                        <h2 class="display-5 fw-bold mb-4">Who We Are</h2>
+                        <h2 class="display-5 fw-bold mb-4">Who We Are?</h2>
                         <p class="fs-4 mb-4">
                             Higanbana is a vibrant community for anime fans where you can
                             rate your favorite shows, track your watchlist, and connect with
                             friends who share your passion.
                         </p>
                         <p class="mb-5">
-                            Our goal is to make anime watching more social and organized.
-                            From ranking your top series to discovering hidden gems and
-                            discussing episodes with your friends, Higanbana is where anime
-                            fans unite.
+                           Our goal is to make watching anime more social and organized. Ranking your favorite shows is easier than ever. Higanbana is where anime fans unite.
                         </p>
 
                        
@@ -60,8 +57,7 @@
                                     <div class="feature-text">
                                         <h5>Socialize</h5>
                                         <p class="small">
-                                            Follow friends, share your watchlist, and discuss
-                                            episodes together.
+                                            Follow friends, share your watchlist, and review.
                                         </p>
                                     </div>
                                 </div>
