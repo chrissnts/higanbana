@@ -27,7 +27,7 @@
                 <div class="col-12 col-lg-6">
                     <div class="p-4 p-md-5">
                         <h2 class="display-5 fw-bold mb-4">Who We Are</h2>
-                        <p class="lead fs-4 mb-4">
+                        <p class="fs-4 mb-4">
                             Higanbana is a vibrant community for anime fans where you can
                             rate your favorite shows, track your watchlist, and connect with
                             friends who share your passion.
