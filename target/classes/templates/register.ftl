@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Higanbana - Register</title>
-    <link rel="icon" type="image/png" href="/img/tokyoFlower.jpeg" />
+    <link rel="icon" type="image/png" href="/img/tokyoFlower.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/styles/login.css" />
@@ -24,7 +24,7 @@
                             <div class="col-lg-6">
                                 <div class="card-body p-0 mx-md-4">
                                     <div class="text-center mb-4">
-                                        <img src="/img/tokyoFlower.jpeg" alt="Higanbana Logo" class="logo" />
+                                        <img src="/img/tokyoFlower.png" alt="Higanbana Logo" class="logo" />
                                         <h4 class="mt-3 mb-5 pb-1">
                                             Create your <strong>Higanbana</strong> account
                                         </h4>

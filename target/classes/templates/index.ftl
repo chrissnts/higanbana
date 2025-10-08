@@ -9,7 +9,7 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="/img/tokyoFlower.jpeg" />
+  <link rel="icon" type="image/png" href="/img/tokyoFlower.png" />
   <link rel="stylesheet" href="/styles/style.css" />
 </head>
 
@@ -20,7 +20,7 @@
 
   <nav class="navbar navbar-expand-lg position-absolute top-0 start-0 end-0 z-3 p-4">
     <div class="container">
-      <a class="navbar-brand me-auto nav-logo" href="#">Higanbana</a>
+      <a class="navbar-brand me-auto nav-logo">Higanbana</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -46,7 +46,7 @@
       <div class="row g-0 h-100 hero-section">
 
         <div class="col-md-6 d-none d-md-flex hero-image-col">
-          <img src="/img/wallpaper.jpeg" alt="Hero Wallpaper" class="hero-image" />
+          <img src="/img/wallpaper.png" alt="Hero Wallpaper" class="hero-image animate-img" />
         </div>
 
         <div class="col-12 col-md-6 hero-content-col d-flex align-items-center justify-content-center">

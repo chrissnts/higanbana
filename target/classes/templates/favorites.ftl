@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Higabana - Home</title>
-  <link rel="icon" type="image/png" href="/img/tokyoFlower.jpeg" />
+  <link rel="icon" type="image/png" href="/img/tokyoFlower.png" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/styles/favorites.css" />
@@ -17,7 +17,7 @@
   <nav class="navbar navbar-expand-lg py-2 px-3">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center text-white" href="home.html">
-        <img class="logo" src="/img/tokyoFlower.jpeg" alt="Logo" />
+        <img class="logo" src="/img/tokyoFlower.png" alt="Logo" />
         <strong class="ms-2">Higabana</strong>
       </a>
 
@@ -47,7 +47,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="navbarUser"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="/img/profile.jpeg" class="rounded-circle me-2" alt="Avatar" width="30" height="30" />
+              <img src="/img/profile.png" class="rounded-circle me-2" alt="Avatar" width="30" height="30" />
               <span class="text-uppercase fw-bold text-white">${user.userName}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">

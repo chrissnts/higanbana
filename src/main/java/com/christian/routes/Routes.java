@@ -19,6 +19,9 @@ public class Routes {
         // Landing Page
         app.get("/", ctx -> ctx.render("index.ftl")); 
 
+        // Landing Page: About
+        app.get("/about", ctx -> ctx.render("about.ftl"));
+
        // Authentication Forms
         app.get("/login", ctx -> ctx.render("login.ftl")); 
         app.get("/register", ctx -> ctx.render("register.ftl"));

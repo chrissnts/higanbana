@@ -1,55 +1,56 @@
  body {
-     margin: 0;
-     font-family: Georgia, serif;
-     background-color: #0c0c0c;
-     color: #ddd;
+   margin: 0;
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   background-color: #0c0c0c;
+   color: #ddd;
  }
 
  .logo {
-     border-radius: 75%;
-     width: 50px;
-     height: 50px;
-     margin-left: 50px;
+   border-radius: 75%;
+   width: 50px;
+   height: 50px;
+   margin-left: 50px;
  }
 
  .navbar {
-     background: #171717;
-     background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(8, 8, 8) 25%, rgb(10, 10, 10) 50%, rgb(12, 12, 12) 100%);
+   background: #171717;
+   background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(8, 8, 8) 25%, rgb(10, 10, 10) 50%, rgb(12, 12, 12) 100%);
  }
 
  .bg-light {
 
-     --bs-bg-opacity: 0.5;
-     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+   --bs-bg-opacity: 0.5;
+   background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
  }
+
  .anime-card {
-  width: 100%;
-  max-width: 150px;
-  aspect-ratio: 2/3;
-  object-fit: cover;
-}
+   width: 100%;
+   max-width: 150px;
+   aspect-ratio: 2/3;
+   object-fit: cover;
+ }
 
-@media (max-width: 576px) {
-  .anime-card {
-    max-width: 120px;
-  }
+ @media (max-width: 576px) {
+   .anime-card {
+     max-width: 120px;
+   }
 
-  .navbar .btn {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
-  }
+   .navbar .btn {
+     padding: 0.25rem 0.5rem;
+     font-size: 0.75rem;
+   }
 
-  .navbar-brand strong {
-    font-size: 1rem;
-  }
-}
+   .navbar-brand strong {
+     font-size: 1rem;
+   }
+ }
 
-.scrolling-wrapper {
-  scroll-snap-type: x mandatory;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
+ .scrolling-wrapper {
+   scroll-snap-type: x mandatory;
+   overflow-x: auto;
+   -webkit-overflow-scrolling: touch;
+ }
 
-.scrolling-wrapper > * {
-  scroll-snap-align: start;
-}
+ .scrolling-wrapper>* {
+   scroll-snap-align: start;
+ }

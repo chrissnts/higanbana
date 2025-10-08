@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Higanbana - Home</title>
-  <link rel="icon" type="image/png" href="/img/tokyoFlower.jpeg" />
+  <link rel="icon" type="image/png" href="/img/tokyoFlower.png" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/styles/home.css" />
@@ -17,7 +17,7 @@
   <nav class="navbar navbar-expand-lg py-2 px-3">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center text-white" href="#">
-        <img class="logo" src="/img/tokyoFlower.jpeg" alt="Logo" />
+        <img class="logo" src="/img/tokyoFlower.png" alt="Logo" />
         <strong class="ms-2">Higanbana</strong>
       </a>
 
@@ -69,7 +69,7 @@
   </nav>
 
   <div class="container text-center mt-4">
-    <h2>Welcome Back, <a href="/profile" class="text-info">${user.userName}</a></h2>
+    <h2>Welcome, <a href="/profile" class="text-info">${user.userName}</a></h2>
     <p class="text-muted">Look what you're friends watching...</p>
   </div>
 
