@@ -31,4 +31,15 @@ public class UserController {
 
         ctx.render("dashboard.ftl", Collections.singletonMap("admin", currentUser));
     };
+
+    public Handler favorite = ctx -> {
+        User currentUser = ctx.sessionAttribute("currentUser");
+
+        if (currentUser == null) {
+            ctx.redirect("/login");
+            return;
+        }
+
+        ctx.render("favorites.ftl", Collections.singletonMap("user", currentUser));
+    };
 }

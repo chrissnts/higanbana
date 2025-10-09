@@ -33,6 +33,7 @@ public class Routes {
 
         // User
         app.get("/home", userController.home);
+        app.get("/favorites", userController.favorite);
 
         // Admin
         app.get("/dashboard", userController.dashboard);

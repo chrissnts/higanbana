@@ -25,7 +25,7 @@
       </a>
 
       <!-- Toggle -->
-      <button  class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAnime"
+      <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAnime"
         aria-controls="navbarAnime" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -79,34 +79,36 @@
     </div>
   </nav>
 
+  
   <!-- Welcome Section -->
   <main class="container text-center mt-4">
-    <h2>Welcome, <a href="/profile" class="text-red">${user.userName}</a></h2>
+    <h2>Welcome, <a href="/profile" class="text-red fw-bold">${user.userName}</a></h2>
     <p class="text-muted">Look what your friends are watching...</p>
   </main>
 
-  <!-- Friends’ Animes -->
+  <!-- NEW FROM FRIENDS Section -->
   <section class="container mt-5">
-    <h5>NEW FROM FRIENDS</h5>
-    <hr />
-    <div class="scrolling-wrapper mt-2 d-flex flex-row gap-4 overflow-auto bg-gradient text-white px-3 py-2">
+    <h5 class="text-white fw-bold">NEW FROM FRIENDS</h5>
+    <hr class="text-white" />
+
+    <div class="d-flex flex-row gap-3 overflow-auto px-2 py-3"
+      style="background: linear-gradient(to right, #020202, #0a0a0a, #141414); box-shadow: 5px 5px 5px #000;">
 
       <!-- Anime Card Template -->
-      <article class="d-flex flex-column align-items-center p-2 rounded shadow-sm bg-light">
-        <img class="anime-card rounded"
-          src="https://images-cdn.ubuy.co.in/633ff1157e3fbc25557517c8-one-piece-poster-japanese-anime-posters.jpg"
-          alt="Anime Poster" />
-        <div class="mt-2 text-center">
-          <div class="d-flex align-items-center justify-content-center gap-2">
-            <img src="https://i.pinimg.com/736x/65/ee/1c/65ee1ca15ea1de2fc176f6c654a503e3.jpg" alt="Profile Pic"
-              class="rounded-circle" width="30" height="30" />
-            <small class="fw-semibold">soldier34 • ⭐⭐⭐⭐⭐</small>
-          </div>
-          <small class="text-muted">1 de Junho</small>
+       <!-- lembra que todas as informaçoes vem do usuario -->
+      <article class="card text-white p-2 d-flex flex-column align-items-center"
+        style="width: 255px; height: 318px; background-color: #2a0404; cursor:pointer;">
+        <img src="https://images-cdn.ubuy.co.in/633ff1157e3fbc25557517c8-one-piece-poster-japanese-anime-posters.jpg"
+          class="rounded mb-2" style="width: 200px; height: 250px;" />
+        <div class="d-flex align-items-center justify-content-center gap-2">
+          <img src="https://i.pinimg.com/736x/65/ee/1c/65ee1ca15ea1de2fc176f6c654a503e3.jpg" class="rounded-circle"
+            width="30" height="30" />
+          <small class="fw-semibold">soldier34 • ⭐⭐⭐⭐⭐</small>
         </div>
+        <small class="text-muted">01/06</small>
       </article>
 
-      <!-- Repetir os cards conforme necessário -->
+      <!-- Repita os cards aqui -->
     </div>
   </section>
 
