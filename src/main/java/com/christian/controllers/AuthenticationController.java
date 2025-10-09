@@ -10,8 +10,6 @@ import com.christian.repository.UserRepository;
 import io.javalin.http.Context;
 
 
-// arrumar problema de all camps must be provided;
-
 public class AuthenticationController implements AuthenticationRepositoryImpl {
     private final UserRepository userRepository;
 
@@ -26,24 +24,23 @@ public class AuthenticationController implements AuthenticationRepositoryImpl {
         String password = ctx.formParam("password");
 
         if (username == null || username.isEmpty() ||
-            email == null || email.isEmpty() ||
-            password == null || password.isEmpty()) {
-            ctx.status(400).result("All camps must be provided.");
+                email == null || email.isEmpty() ||
+                password == null || password.isEmpty()) {
+            ctx.redirect("/register?error=All+camps+must+be+provided");
             return;
         }
 
         if (userRepository.findByEmail(email) != null) {
-            ctx.status(409).result("E-mail already in use.");
+            ctx.redirect("/register?error=E-mail+already+in+use");
             return;
         }
 
-        
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
         User newUser = new User(username, email, hashedPassword, Role.USER);
         userRepository.save(newUser);
 
-        ctx.redirect("/");
+        ctx.redirect("/login");
     }
 
     @Override
@@ -52,7 +49,7 @@ public class AuthenticationController implements AuthenticationRepositoryImpl {
         String password = ctx.formParam("password");
 
         if (email == null || password == null) {
-            ctx.status(400).result("E-mail and password must be provided.");
+            ctx.redirect("/login?error=E-mail+and+password+must+be+provided");
             return;
         }
 
@@ -61,12 +58,12 @@ public class AuthenticationController implements AuthenticationRepositoryImpl {
         if (user != null && BCrypt.checkpw(password, user.getPassword())) {
             ctx.sessionAttribute("currentUser", user);
             if (user.getRole() == Role.ADMIN) {
-                ctx.redirect("/admin/dashboard");
+                ctx.redirect("/dashboard");
             } else {
-                ctx.redirect("/client/home");
+                ctx.redirect("/home");
             }
         } else {
-            ctx.status(401).result("E-mail or password invalid.");
+            ctx.redirect("/login?error=E-mail+or+password+incorrect");
         }
     }
 

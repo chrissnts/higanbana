@@ -19,7 +19,7 @@
         <div class="col-xl-10">
           <div class="card rounded-4 text-white">
             <div class="row g-0">
-            
+
               <div class="col-lg-6">
                 <div class="card-body p-md-5 mx-md-4">
                   <div class="text-center mb-4">
@@ -48,22 +48,18 @@
                         placeholder="Password" required />
                     </div>
 
-                      <#if error??>
-                        <div class="alert alert-danger" role="alert">
-                          ${error}
-                        </div>
-                      </#if>
+                   <div id="login-error" class="alert alert-danger d-none" role="alert"></div>
 
-                      <div class="text-center pt-1 mb-5 pb-1">
-                        <button type="submit" class="btn btn-danger btn-block fa-lg mb-3">
-                          Login
-                        </button>
-                      </div>
+                    <div class="text-center pt-1 mb-5 pb-1">
+                      <button type="submit" class="btn btn-danger btn-block fa-lg mb-3">
+                        Login
+                      </button>
+                    </div>
 
-                      <div class="d-flex align-items-center justify-content-between mb-4">
-                        <p class="mb-0 text-white">Don't have an account?</p>
-                        <a href="/register" class="btn btn-danger">Register</a>
-                      </div>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                      <p class="mb-0 text-white">Don't have an account?</p>
+                      <a href="/register" class="btn btn-danger">Register</a>
+                    </div>
                   </form>
 
                 </div>
@@ -79,7 +75,15 @@
       </div>
     </div>
   </section>
-
+  <script>
+   const params = new URLSearchParams(window.location.search);
+const error = params.get("error");
+if (error) {
+  const div = document.getElementById("login-error");
+  div.textContent = error.replace(/\+/g, ' '); // substitui "+" por espaço
+  div.classList.remove("d-none");
+}
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 </body>
 

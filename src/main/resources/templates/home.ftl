@@ -25,7 +25,7 @@
       </a>
 
       <!-- Toggle -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAnime"
+      <button  class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAnime"
         aria-controls="navbarAnime" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -64,9 +64,12 @@
               <li><a class="dropdown-item" href="/favorites">Favorites</a></li>
               <li><a class="dropdown-item" href="/activity">Activity</a></li>
               <li><a class="dropdown-item" href="/settings">Settings</a></li>
-              <li><hr class="dropdown-divider" /></li>
               <hr>
-              <li><a class="dropdown-item" href="/logout">Sign Out</a></li>
+              <li>
+                <form action="/logout" method="post" class="d-inline">
+                  <button type="submit" class="dropdown-item">Sign Out</button>
+                </form>
+              </li>
             </ul>
           </li>
 
@@ -78,7 +81,7 @@
 
   <!-- Welcome Section -->
   <main class="container text-center mt-4">
-    <h2>Welcome, <a href="/profile" class="text-info">${user.userName}</a></h2>
+    <h2>Welcome, <a href="/profile" class="text-red">${user.userName}</a></h2>
     <p class="text-muted">Look what your friends are watching...</p>
   </main>
 

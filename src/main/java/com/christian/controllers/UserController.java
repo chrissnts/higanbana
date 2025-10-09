@@ -15,7 +15,7 @@ public class UserController {
         }
 
         if (currentUser.getRole() == Role.ADMIN) {
-            ctx.redirect("/admin/dashboard");
+            ctx.redirect("/dashboard");
         } else {
             ctx.render("home.ftl", Collections.singletonMap("user", currentUser));
         }

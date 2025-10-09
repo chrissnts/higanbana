@@ -19,7 +19,7 @@
         <div class="container">
             <div class="row gy-5 align-items-center">
                 <div class="col-12 col-lg-6 text-center">
-                    <img class="img-fluid rounded shadow-lg w-75 animate-img" loading="lazy" src="/img/image.png"
+                    <img class="img-fluid rounded w-75 animate-img" loading="lazy" src="/img/image.png"
                         alt="Higanbana" />
                 </div>
 

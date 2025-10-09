@@ -32,9 +32,9 @@ public class Routes {
         app.post("/logout", authController::logout);
 
         // User
-        app.get("/client/home", userController.home);
+        app.get("/home", userController.home);
 
         // Admin
-        app.get("/admin/dashboard", userController.dashboard);
+        app.get("/dashboard", userController.dashboard);
     }
 }

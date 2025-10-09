@@ -20,7 +20,6 @@
                     <div class="card rounded-4 text-white">
                         <div class="row g-0">
 
-                           
                             <div class="col-lg-6">
                                 <div class="card-body p-0 mx-md-4">
                                     <div class="text-center mb-4">
@@ -29,6 +28,8 @@
                                             Create your <strong>Higanbana</strong> account
                                         </h4>
                                     </div>
+
+                                    <div id="login-error" class="alert alert-danger d-none" role="alert"></div>
 
 
                                     <form id="register-form" method="POST" action="/register">
@@ -52,11 +53,6 @@
                                                 class="form-control bg-transparent text-white border-bottom border-white rounded-0"
                                                 placeholder="Password" required />
                                         </div>
-                                         <#if error??>
-                                         <div class="alert alert-danger" role="alert">
-                                                ${error}
-                                            </div>
-                                        </#if>
 
                                         <div class="text-center pt-1 mb-5 pb-1">
                                             <button type="submit" class="btn btn-danger btn-block fa-lg mb-3">
@@ -72,7 +68,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 d-none d-lg-flex justify-content-center align-items-center gradient-custom-2">
+                            <div
+                                class="col-lg-6 d-none d-lg-flex justify-content-center align-items-center gradient-custom-2">
                                 <p class="higanbana-text text-white display-1">ヒガンバナ</p>
                             </div>
 
@@ -82,6 +79,15 @@
             </div>
         </div>
     </section>
+   <script>
+   const params = new URLSearchParams(window.location.search);
+const error = params.get("error");
+if (error) {
+  const div = document.getElementById("login-error");
+  div.textContent = error.replace(/\+/g, ' '); // substitui "+" por espaço
+  div.classList.remove("d-none");
+}
+  </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 </body>
 
