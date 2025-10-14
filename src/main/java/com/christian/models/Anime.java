@@ -29,6 +29,14 @@ public class Anime {
         this.reviews = reviews != null ? reviews : new ArrayList<>();
     }
     
+    //so para usar de test na dashboard
+    public Anime(Long id, String title, int episodesCount, double rating) {
+    this.id = id;
+    this.title = title;
+    this.episodesCount = episodesCount;
+    this.rating = rating;
+}
+
     public Anime() {
     }
 

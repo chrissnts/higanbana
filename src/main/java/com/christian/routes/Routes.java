@@ -1,6 +1,7 @@
 package com.christian.routes;
 
 import com.christian.controllers.AuthenticationController;
+import com.christian.controllers.DashboardController;
 import com.christian.controllers.UserController;
 
 import io.javalin.Javalin;
@@ -8,10 +9,12 @@ import io.javalin.Javalin;
 public class Routes {
     private final AuthenticationController authController;
     private final UserController userController;
+    private final DashboardController dashboardController;
 
     public Routes() {
         this.authController = new AuthenticationController();
         this.userController = new UserController();
+        this.dashboardController = new DashboardController();
     }
 
     public void registerRoutes(Javalin app) {
@@ -33,9 +36,9 @@ public class Routes {
 
         // User
         app.get("/home", userController.home);
-        app.get("/favorites", userController.favorite);
+        app.get("/favorites", userController.favorites);
 
         // Admin
-        app.get("/dashboard", userController.dashboard);
+        app.get("/dashboard", dashboardController.dashboard);
     }
 }

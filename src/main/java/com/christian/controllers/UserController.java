@@ -1,4 +1,5 @@
 package com.christian.controllers;
+
 import com.christian.models.Role;
 import com.christian.models.User;
 import io.javalin.http.Handler;
@@ -15,24 +16,13 @@ public class UserController {
         }
 
         if (currentUser.getRole() == Role.ADMIN) {
-            ctx.redirect("/dashboard");
+            ctx.redirect("/dashboard"); // apenas redireciona
         } else {
             ctx.render("home.ftl", Collections.singletonMap("user", currentUser));
         }
     };
 
-    public Handler dashboard = ctx -> {
-        User currentUser = ctx.sessionAttribute("currentUser");
-
-        if (currentUser == null || currentUser.getRole() != Role.ADMIN) {
-            ctx.redirect("/login");
-            return;
-        }
-
-        ctx.render("dashboard.ftl", Collections.singletonMap("admin", currentUser));
-    };
-
-    public Handler favorite = ctx -> {
+    public Handler favorites = ctx -> {
         User currentUser = ctx.sessionAttribute("currentUser");
 
         if (currentUser == null) {
