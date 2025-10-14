@@ -11,7 +11,7 @@ public class User {
     private String email;
     private String password;
     private Role role;
-    private String profileImage = "/img/profileDefault.jpeg";
+    private String profileImage;
     private List<Anime> watchedAnimes = new ArrayList<>();
     private List<Anime> watchlistAnime = new ArrayList<>();
     private List<Review> reviews = new ArrayList<>();

@@ -14,23 +14,23 @@
 </head>
 
 <body>
-  <!-- Navbar -->
+  
   <nav class="navbar navbar-expand-lg py-2 px-3">
     <div class="container-fluid">
 
-      <!-- Logo -->
+      
       <a class="navbar-brand d-flex align-items-center text-white" href="/home">
         <img src="/img/tokyoFlower.png" alt="Logo" class="rounded-circle me-2" style="width:35px;height:35px;" />
         <strong>Higanbana</strong>
       </a>
 
-      <!-- Toggle -->
+      
       <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAnime"
         aria-controls="navbarAnime" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Navbar links -->
+      
       <div class="collapse navbar-collapse" id="navbarAnime">
         <ul class="navbar-nav ms-auto align-items-center mb-2 mb-lg-0">
 
@@ -46,13 +46,13 @@
             <button class="btn btn-danger btn-sm px-3 fw-bold">+ LOG</button>
           </li>
 
-          <!-- Search -->
+          
           <form class="d-flex gap-2 my-2 me-4" role="search">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="width:150px;" />
             <button class="btn btn-danger" type="submit">Search</button>
           </form>
 
-          <!-- User Dropdown -->
+          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="navbarUser"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -80,13 +80,13 @@
   </nav>
 
   
-  <!-- Welcome Section -->
+  
   <main class="container text-center mt-4">
     <h2>Welcome, <a href="/profile" class="text-red fw-bold">${user.userName}</a></h2>
     <p class="text-muted">Look what your friends are watching...</p>
   </main>
 
-  <!-- NEW FROM FRIENDS Section -->
+  
   <section class="container mt-5">
     <h5 class="text-white fw-bold">NEW FROM FRIENDS</h5>
     <hr class="text-white" />
@@ -107,8 +107,6 @@
         </div>
         <small class="text-muted">01/06</small>
       </article>
-
-      <!-- Repita os cards aqui -->
     </div>
   </section>
 
