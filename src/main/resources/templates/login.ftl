@@ -76,7 +76,7 @@
     </div>
   </section>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
-  <script src="/scripts/login.js"></script>
+  <script src="/js/login.js"></script>
 </body>
 
 </html>
