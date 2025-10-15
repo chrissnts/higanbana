@@ -20,6 +20,9 @@ public class WatchListEntry {
         this.watched = false;
     }
 
+    public WatchListEntry() {
+    }
+
     public Long getId() {
         return id;
     }

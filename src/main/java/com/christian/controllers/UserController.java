@@ -4,6 +4,8 @@ import com.christian.models.Role;
 import com.christian.models.User;
 import io.javalin.http.Handler;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserController {
 
@@ -18,7 +20,9 @@ public class UserController {
         if (currentUser.getRole() == Role.ADMIN) {
             ctx.redirect("/dashboard"); // apenas redireciona
         } else {
-            ctx.render("home.ftl", Collections.singletonMap("user", currentUser));
+            Map<String, Object> model = new HashMap<>();
+            model.put("user", currentUser);
+            ctx.render("home.ftl", model);
         }
     };
 
@@ -30,6 +34,8 @@ public class UserController {
             return;
         }
 
-        ctx.render("favorites.ftl", Collections.singletonMap("user", currentUser));
+        Map<String, Object> model = new HashMap<>();
+        model.put("user", currentUser);
+        ctx.render("favorites.ftl", model);
     };
 }

@@ -48,7 +48,7 @@
                         placeholder="Password" required />
                     </div>
 
-                   <div id="login-error" class="alert alert-danger d-none" role="alert"></div>
+                    <div id="login-error" class="alert alert-danger d-none" role="alert"></div>
 
                     <div class="text-center pt-1 mb-5 pb-1">
                       <button type="submit" class="btn btn-danger btn-block fa-lg mb-3">
@@ -75,16 +75,8 @@
       </div>
     </div>
   </section>
-  <script>
-   const params = new URLSearchParams(window.location.search);
-const error = params.get("error");
-if (error) {
-  const div = document.getElementById("login-error");
-  div.textContent = error.replace(/\+/g, ' '); // substitui "+" por espaço
-  div.classList.remove("d-none");
-}
-  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+  <script src="/scripts/login.js"></script>
 </body>
 
 </html>

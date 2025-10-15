@@ -1,29 +1,30 @@
 package com.christian.controllers;
 
 import com.christian.models.*;
+import com.christian.services.DashboardService;
 import io.javalin.http.Handler;
-import java.util.*;
+
+import java.util.Map;
 
 public class DashboardController {
 
-    public Handler dashboard = ctx -> {
-        User currentUser = ctx.sessionAttribute("currentUser");
+    private final DashboardService dashboardService;
+    public final Handler dashboard;
 
-        if (currentUser == null || currentUser.getRole() != Role.ADMIN) {
-            ctx.redirect("/login");
-            return;
-        }
+    public DashboardController(DashboardService dashboardService) {
+        this.dashboardService = dashboardService;
 
-        // Dados de exemplo - futuramente buscar do banco
-        List<Anime> animes = Arrays.asList(
-                new Anime(1L, "One Piece", 1000, 4.8),
-            new Anime(2L, "Hunter x Hunter", 175, 4.8),
-            new Anime(3L, "Jujutsu Kaisen", 100, 4.8),
-            new Anime(4L, "Darling in The Franxx", 25, 4.8),
-            new Anime(5L, "Naruto", 800, 6.9)
-        );
+        this.dashboard = ctx -> {
+            User currentUser = ctx.sessionAttribute("currentUser");
 
-    Map<String, Object> model = new HashMap<>();model.put("admin",currentUser);model.put("animes",animes);
+            if (currentUser == null || !currentUser.getRole().equals(Role.ADMIN)) {
+                ctx.redirect("/login");
+                return;
+            }
 
-    ctx.render("dashboard.ftl",model);
-};}
+            Map<String, Object> model = dashboardService.getDashboardModel(currentUser);
+            ctx.render("dashboard.ftl", model);
+        };
+    }
+}
+

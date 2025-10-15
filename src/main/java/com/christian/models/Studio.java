@@ -9,12 +9,15 @@ public class Studio {
         this.name = name;
     }
 
+    public Studio() {
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(int id) {
+        this.id = (long) id;
     }
 
     public String getName() {

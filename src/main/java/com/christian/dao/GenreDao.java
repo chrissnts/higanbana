@@ -1,0 +1,37 @@
+package com.christian.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.christian.database.DataBaseConnection;
+import com.christian.models.Genre;
+
+public class GenreDao {
+     public List<Genre> findAll() {
+        String sql = "SELECT * FROM genres";
+        List<Genre> genres = new java.util.ArrayList<>();
+
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                genres.add(mapResultSetToGenre(rs));
+            }
+            return genres;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return genres;
+    }
+    private Genre mapResultSetToGenre(ResultSet rs) throws SQLException {
+        Genre genre = new Genre();
+        genre.setId(rs.getInt("id"));
+        genre.setName(rs.getString("name"));
+        return genre;
+    }
+}

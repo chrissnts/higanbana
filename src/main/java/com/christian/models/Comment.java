@@ -10,9 +10,7 @@ public class Comment {
     private LocalDateTime createdAt;
 
 
-    public Comment() {
-    }
-
+   
     public Comment(Long id, User user, String content, Review review, LocalDateTime createdAt) {
         this.id = id;
         this.user = user;
@@ -20,6 +18,17 @@ public class Comment {
         this.review = review;
         this.createdAt = createdAt;
     }
+
+    public Comment(User user, String content, Review review) {
+        this.user = user;
+        this.content = content;
+        this.review = review;
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public Comment() {
+    }
+
 
     // Getters e Setters
     public Long getId() {

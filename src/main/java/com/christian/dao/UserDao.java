@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.christian.database.DataBaseConnection;
 import com.christian.models.Role;
@@ -31,7 +32,26 @@ public class UserDao {
         return null;
     }
 
-    
+    public List<User> findAll() {
+        String sql = "SELECT * FROM users WHERE role_id != 1";
+        List<User> users = new java.util.ArrayList<>();
+
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                users.add(mapResultSetToUser(rs));
+            }
+            return users;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+        
     public User findByEmail(String email) {
         String sql = "SELECT * FROM users WHERE email = ?";
 
