@@ -1,8 +1,5 @@
 package com.christian.controllers;
 
-import com.christian.models.Anime;
-import io.javalin.http.Handler;
-import java.util.*;
 
 public class AnimeController {
 

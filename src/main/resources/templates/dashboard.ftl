@@ -97,10 +97,12 @@
                                                 <a href="/users/${user.id}/edit"
                                                     class="btn btn-danger btn-sm px-3 fw-bold"><i
                                                         class="bi bi-pencil-fill me-1"></i> EDIT</a>
-                                                <a href="/users/${user.id}/delete"
-                                                    class="btn btn-danger btn-sm px-3 fw-bold">
-                                                    <iclass="bi bi-trash-fill ms-2"></i> DELETE
-                                                </a>
+                                                <form action="/users/${user.id}/delete" method="post" onsubmit="return confirm('Are you sure you want to delete?');"
+                                                    style="display:inline;">
+                                                    <button type="submit" class="btn btn-danger btn-sm px-3 fw-bold">
+                                                        <i class="bi bi-trash-fill me-1"></i> DELETE
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </#list>
@@ -140,9 +142,12 @@
                                                 <a href="/animes/${anime.id}/edit"
                                                     class="btn btn-danger btn-sm px-3 fw-bold"><i
                                                         class="bi bi-pencil-fill me-1"></i> EDIT</a>
-                                                <a href="/animes/${anime.id}/delete"
-                                                    class="btn btn-danger btn-sm px-3 fw-bold"><i
-                                                        class="bi bi-trash-fill ms-2"></i> DELETE</a>
+                                                <form action="/animes/${anime.id}/delete" method="post" onsubmit="return confirm('Are you sure you want to delete?');"
+                                                    style="display:inline;">
+                                                    <button type="submit" class="btn btn-danger btn-sm px-3 fw-bold">
+                                                        <i class="bi bi-trash-fill me-1"></i> DELETE
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </#list>
@@ -178,9 +183,12 @@
                                                 <a href="/studios/${studio.id}/edit"
                                                     class="btn btn-danger btn-sm px-3 fw-bold"><i
                                                         class="bi bi-pencil-fill me-1"></i> EDIT</a>
-                                                <a href="/studios/${studio.id}/delete"
-                                                    class="btn btn-danger btn-sm px-3 fw-bold"><i
-                                                        class="bi bi-trash-fill ms-2"></i> DELETE</a>
+                                                <form action="/studios/${studio.id}/delete" method="post" onsubmit="return confirm('Are you sure you want to delete?');"
+                                                    style="display:inline;">
+                                                    <button type="submit" class="btn btn-danger btn-sm px-3 fw-bold">
+                                                        <i class="bi bi-trash-fill me-1"></i> DELETE
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </#list>
@@ -218,10 +226,12 @@
                                                     class="btn btn-danger btn-sm px-3 fw-bold"><i
                                                         class="bi bi-pencil-fill me-1"></i> EDIT
                                                 </a>
-                                                <a href="/genres/${genre.id}/delete"
-                                                    class="btn btn-danger btn-sm px-3 fw-bold">
-                                                    <iclass="bi bi-trash-fill ms-2"></i> DELETE
-                                                </a>
+                                                <form action="/genres/${genre.id}/delete" method="post" onsubmit="return confirm('Are you sure you want to delete?');"
+                                                    style="display:inline;" >
+                                                    <button type="submit" class="btn btn-danger btn-sm px-3 fw-bold">
+                                                        <i class="bi bi-trash-fill me-1"></i> DELETE
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </#list>

@@ -80,15 +80,9 @@
         </div>
     </section>
    <script>
-   const params = new URLSearchParams(window.location.search);
-const error = params.get("error");
-if (error) {
-  const div = document.getElementById("login-error");
-  div.textContent = error.replace(/\+/g, ' '); // substitui "+" por espaço
-  div.classList.remove("d-none");
-}
   </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+    <script src="/js/login.js"></script>
 </body>
 
 </html>

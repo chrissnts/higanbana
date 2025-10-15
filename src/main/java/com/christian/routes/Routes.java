@@ -6,7 +6,6 @@ import com.christian.controllers.UserController;
 import com.christian.services.DashboardService;
 import com.christian.dao.*;
 
-
 import io.javalin.Javalin;
 
 public class Routes {
@@ -30,11 +29,11 @@ public class Routes {
 
     public void registerRoutes(Javalin app) {
         // Landing Page
-        app.get("/", ctx -> ctx.render("index.ftl")); 
+        app.get("/", ctx -> ctx.render("index.ftl"));
         app.get("/about", ctx -> ctx.render("about.ftl"));
 
         // Authentication Forms
-        app.get("/login", ctx -> ctx.render("login.ftl")); 
+        app.get("/login", ctx -> ctx.render("login.ftl"));
         app.get("/register", ctx -> ctx.render("register.ftl"));
 
         // Authentication Actions
@@ -47,6 +46,11 @@ public class Routes {
         app.get("/favorites", userController.favorites);
 
         // Admin
-        app.get("/dashboard", dashboardController.dashboard); 
+        app.get("/dashboard", dashboardController::dashboard);
+        app.post("/users/{id}/delete", dashboardController::deleteUser);
+        app.post("/animes/{id}/delete", dashboardController::deleteAnime);
+        app.post("/studios/{id}/delete", dashboardController::deleteStudio);
+        app.post("/genres/{id}/delete", dashboardController::deleteGenre);
+
     }
 }

@@ -28,6 +28,21 @@ public class GenreDao {
         }
         return genres;
     }
+
+     public void delete(int id) {
+        String sql = "DELETE FROM genres WHERE id = ?";
+
+        try (Connection conn = DataBaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private Genre mapResultSetToGenre(ResultSet rs) throws SQLException {
         Genre genre = new Genre();
         genre.setId(rs.getInt("id"));

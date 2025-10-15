@@ -12,7 +12,7 @@ public class DashboardService {
 
     private final UserDao userDao;
     private final AnimeDao animeDao;
-    private final StudioDao  studioDao;
+    private final StudioDao studioDao;
     private final GenreDao genreDao;
 
     public DashboardService(UserDao userDao, AnimeDao animeDao, StudioDao studioDao, GenreDao genreDao) {
@@ -62,26 +62,38 @@ public class DashboardService {
         }
     }
 
-   public Map<String, Object> getDashboardModel(User admin) {
-    Map<String, Object> model = new HashMap<>();
-    model.put("admin", admin);
+    public void deleteUser(int id) {
+        userDao.delete(id);
+    }
 
-    // Todos os usuários
-    List<User> users = getAllUsers();
-    model.put("users", users);
+    public void deleteAnime(int id) {
+        animeDao.delete(id);
+    }
 
-    // Todos os animes
-    List<Anime> animes = getAllAnimes();
-    model.put("animes", animes);
+    public void deleteStudio(int id) {
+        studioDao.delete(id);
+    }
 
-    // Todos os studios
-    List<Studio> studios = getAllStudios();
-    model.put("studios", studios);
+    public void deleteGenre(int id) {
+        genreDao.delete(id);
+    }
 
-    // Todos os gêneros
-    List<Genre> genres = getAllGenres();
-    model.put("genres", genres);
+    public Map<String, Object> getDashboardModel(User admin) {
+        Map<String, Object> model = new HashMap<>();
+        model.put("admin", admin);
 
-    return model;
-}
+        List<User> users = getAllUsers();
+        model.put("users", users);
+
+        List<Anime> animes = getAllAnimes();
+        model.put("animes", animes);
+
+        List<Studio> studios = getAllStudios();
+        model.put("studios", studios);
+
+        List<Genre> genres = getAllGenres();
+        model.put("genres", genres);
+
+        return model;
+    }
 }
