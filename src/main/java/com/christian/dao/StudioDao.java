@@ -10,6 +10,35 @@ import com.christian.models.Studio;
 
 public class StudioDao {
 
+    public void save(Studio studio) {
+        String sql = "INSERT INTO studios (name) VALUES (?)";
+
+        try (Connection conn = DataBaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, studio.getName());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int id) {
+        String sql = "DELETE FROM studios WHERE id = ?";
+
+        try (Connection conn = DataBaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public List<Studio> findAll() {
         String sql = "SELECT * FROM studios";
         List<Studio> studios = new java.util.ArrayList<>();
@@ -29,19 +58,7 @@ public class StudioDao {
         return studios;
     }
 
-    public void delete(int id) {
-        String sql = "DELETE FROM studios WHERE id = ?";
-
-        try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    
 
     private Studio mapResultSetToStudio(ResultSet rs) throws SQLException {
         Studio studio = new Studio();

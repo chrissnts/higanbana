@@ -10,26 +10,22 @@ import com.christian.database.DataBaseConnection;
 import com.christian.models.Genre;
 
 public class GenreDao {
-     public List<Genre> findAll() {
-        String sql = "SELECT * FROM genres";
-        List<Genre> genres = new java.util.ArrayList<>();
+
+    public void save(Genre genre) {
+        String sql = "INSERT INTO genres (name) VALUES (?)";
 
         try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                genres.add(mapResultSetToGenre(rs));
-            }
-            return genres;
+            stmt.setString(1, genre.getName());
+            stmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return genres;
     }
 
-     public void delete(int id) {
+    public void delete(int id) {
         String sql = "DELETE FROM genres WHERE id = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
@@ -41,6 +37,25 @@ public class GenreDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Genre> findAll() {
+        String sql = "SELECT * FROM genres";
+        List<Genre> genres = new java.util.ArrayList<>();
+
+        try (Connection conn = DataBaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                genres.add(mapResultSetToGenre(rs));
+            }
+            return genres;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return genres;
     }
 
     private Genre mapResultSetToGenre(ResultSet rs) throws SQLException {

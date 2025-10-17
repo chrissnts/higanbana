@@ -12,7 +12,62 @@ import com.christian.models.User;
 
 public class UserDao {
 
+    public void save(User user) {
+        String sql = "INSERT INTO users (user_name, email, password, role_id, profile_image) VALUES (?,?,?,?,?)";
+
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, user.getUserName());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            stmt.setInt(4, user.getRole().getId()); 
+            stmt.setString(5, user.getProfileImage());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     
+    public void update(User user) {
+        String sql = "UPDATE users SET user_name = ?, email = ?, role_id = ?, profile_image = ? WHERE id = ?";
+
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, user.getUserName());
+            stmt.setString(2, user.getEmail());
+            stmt.setInt(3, user.getRole().getId());
+            stmt.setString(4, user.getProfileImage());
+            stmt.setLong(5, user.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+   
+    public void delete(int id) {
+        String sql = "DELETE FROM users WHERE id = ?";
+
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     public User findById(int id) {
         String sql = "SELECT * FROM users WHERE id = ?";
 
@@ -72,59 +127,6 @@ public class UserDao {
     }
 
    
-    public void save(User user) {
-        String sql = "INSERT INTO users (user_name, email, password, role_id, profile_image) VALUES (?,?,?,?,?)";
-
-        try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, user.getUserName());
-            stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getPassword());
-            stmt.setInt(4, user.getRole().getId()); 
-            stmt.setString(5, user.getProfileImage());
-
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    
-    public void update(User user) {
-        String sql = "UPDATE users SET user_name = ?, email = ?, role_id = ?, profile_image = ? WHERE id = ?";
-
-        try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, user.getUserName());
-            stmt.setString(2, user.getEmail());
-            stmt.setInt(3, user.getRole().getId()); // atualiza role
-            stmt.setString(4, user.getProfileImage());
-            stmt.setLong(5, user.getId());
-
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-   
-    public void delete(int id) {
-        String sql = "DELETE FROM users WHERE id = ?";
-
-        try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     
     private User mapResultSetToUser(ResultSet rs) throws SQLException {

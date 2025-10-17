@@ -120,6 +120,7 @@ a {
 
 
 .btn-get-started {
+  
   background: var(--primary-color);
   color: #ffffff;
   border: 1px solid var(--primary-color);
@@ -154,6 +155,8 @@ a {
   opacity: 0.15;
   z-index: 1;
 }
+
+
 
 @keyframes fadeSlideIn {
     0% {

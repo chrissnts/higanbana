@@ -1,7 +1,27 @@
-C:\Users\Chris\OneDrive\Documentos\Project Bat\bat\src\main\java\com\santos\christian\models\Cadastro.java
-C:\Users\Chris\OneDrive\Documentos\Project Bat\bat\src\main\java\com\santos\christian\controllers\IndexController.java
-C:\Users\Chris\OneDrive\Documentos\Project Bat\bat\src\main\java\com\santos\christian\controllers\CadastroController.java
-C:\Users\Chris\OneDrive\Documentos\Project Bat\bat\src\main\java\com\santos\christian\App.java
-C:\Users\Chris\OneDrive\Documentos\Project Bat\bat\src\main\java\com\santos\christian\controllers\ListaController.java
-C:\Users\Chris\OneDrive\Documentos\Project Bat\bat\src\main\java\com\santos\christian\utils\JavalinUtils.java
-C:\Users\Chris\OneDrive\Documentos\Project Bat\bat\src\main\java\com\santos\christian\models\Pessoa.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/dao/GenreDao.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/models/Comment.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/config/AppConfig.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/controllers/DashboardController.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/repository/StudioRepository.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/controllers/AuthenticationController.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/controllers/UserController.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/repository/UserRepository.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/controllers/AnimeController.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/database/DataBaseConnection.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/Main.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/models/Anime.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/models/Review.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/models/Genre.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/models/User.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/repository/GenreRepository.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/models/Studio.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/models/Role.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/repository/DashboardRepository.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/routes/Routes.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/dao/UserDao.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/repository/AnimeRepository.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/controllers/StudioController.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/dao/AnimeDao.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/dao/StudioDao.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/models/WatchListEntry.java
+/home/aluno/Documentos/higanbana/src/main/java/com/christian/controllers/GenreController.java

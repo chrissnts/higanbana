@@ -11,7 +11,7 @@ import com.christian.models.Anime;
 
 public class AnimeDao {
 
-    // Buscar anime por ID
+    
     public Anime findById(int id) {
         String sql = "SELECT * FROM animes WHERE id = ?";
 
@@ -51,7 +51,7 @@ public class AnimeDao {
     }
 
 
-    // Salvar novo anime
+   
     public void save(Anime anime) {
         String sql = "INSERT INTO animes (title, episodes_count, synopsis, image_url, rating, release_date) VALUES (?,?,?,?,?,?)";
 
@@ -73,8 +73,8 @@ public class AnimeDao {
     }
 
 
-    // Atualizar anime
-    public void update(Anime anime) {
+    
+    public void edit(Anime anime) {
         String sql = "UPDATE animes SET title = ?, episodes_count = ?, synopsis = ?, image_url = ?, rating = ?, release_date = ? WHERE id = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
@@ -96,7 +96,7 @@ public class AnimeDao {
     }
 
 
-    // Deletar anime por ID
+   
     public void delete(int id) {
         String sql = "DELETE FROM animes WHERE id = ?";
 
@@ -112,7 +112,7 @@ public class AnimeDao {
     }
 
 
-    // Converter resultado SQL em objeto Anime
+    
     private Anime mapResultSetToAnime(ResultSet rs) throws SQLException {
         Anime anime = new Anime();
         anime.setId(rs.getLong("id"));

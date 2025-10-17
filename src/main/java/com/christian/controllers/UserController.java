@@ -2,13 +2,26 @@ package com.christian.controllers;
 
 import com.christian.models.Role;
 import com.christian.models.User;
-import io.javalin.http.Handler;
+import com.christian.repository.UserRepository;
+import io.javalin.http.Context;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserController {
 
-    public Handler home = ctx -> {
+    private final UserRepository userRepository;
+
+    public UserController() {
+        this.userRepository = null;
+    }
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    
+    public void home(Context ctx) {
         User currentUser = ctx.sessionAttribute("currentUser");
 
         if (currentUser == null) {
@@ -17,15 +30,17 @@ public class UserController {
         }
 
         if (currentUser.getRole() == Role.ADMIN) {
-            ctx.redirect("/dashboard"); 
-        } else {
-            Map<String, Object> model = new HashMap<>();
-            model.put("user", currentUser);
-            ctx.render("home.ftl", model);
+            ctx.redirect("/dashboard");
+            return;
         }
-    };
 
-    public Handler favorites = ctx -> {
+        Map<String, Object> model = new HashMap<>();
+        model.put("user", currentUser);
+        ctx.render("home.ftl", model);
+    }
+
+    
+    public void favorites(Context ctx) {
         User currentUser = ctx.sessionAttribute("currentUser");
 
         if (currentUser == null) {
@@ -36,5 +51,17 @@ public class UserController {
         Map<String, Object> model = new HashMap<>();
         model.put("user", currentUser);
         ctx.render("favorites.ftl", model);
-    };
+    }
+
+    
+    public void delete(Context ctx) {
+        if (userRepository == null) {
+            ctx.status(500).result("UserRepository não inicializado");
+            return;
+        }
+
+        int userId = Integer.parseInt(ctx.pathParam("id"));
+        userRepository.deleteUser(userId);
+        ctx.redirect("/dashboard");
+    }
 }

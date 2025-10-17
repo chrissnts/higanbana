@@ -2,16 +2,15 @@ package com.christian.controllers;
 
 import com.christian.models.Role;
 import com.christian.models.User;
-import com.christian.services.DashboardService;
-
+import com.christian.repository.DashboardRepository;
 import io.javalin.http.Context;
 
 public class DashboardController {
 
-    private final DashboardService dashboardService;
+    private final DashboardRepository dashboardRepository;
 
-    public DashboardController(DashboardService dashboardService) {
-        this.dashboardService = dashboardService;
+    public DashboardController(DashboardRepository dashboardRepository) {
+        this.dashboardRepository = dashboardRepository;
     }
 
     public void dashboard(Context ctx) {
@@ -22,34 +21,6 @@ public class DashboardController {
             return;
         }
 
-        ctx.render("dashboard.ftl", dashboardService.getDashboardModel(admin));
-    }
-
-    
-    public void deleteUser(Context ctx) {
-        int userId = Integer.parseInt(ctx.pathParam("id"));
-        dashboardService.deleteUser(userId);
-        ctx.redirect("/dashboard");
-    }
-
-    
-    public void deleteAnime(Context ctx) {
-        int animeId = Integer.parseInt(ctx.pathParam("id"));
-        dashboardService.deleteAnime(animeId);
-        ctx.redirect("/dashboard");
-    }
-
-   
-    public void deleteStudio(Context ctx) {
-        int studioId = Integer.parseInt(ctx.pathParam("id"));
-        dashboardService.deleteStudio(studioId);
-        ctx.redirect("/dashboard");
-    }
-
-    
-    public void deleteGenre(Context ctx) {
-        int genreId = Integer.parseInt(ctx.pathParam("id"));
-        dashboardService.deleteGenre(genreId);
-        ctx.redirect("/dashboard");
+        ctx.render("dashboard.ftl", dashboardRepository.getDashboardModel(admin));
     }
 }

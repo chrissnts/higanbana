@@ -32,6 +32,9 @@
             <a class="nav-link" href="/login">SIGN IN</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/about">ABOUT US</a>
           </li>
         </ul>
@@ -58,9 +61,10 @@
             <p class="hero-subtitle mb-5 mx-auto mx-md-0">
               Share your thoughts and rate the anime series you love—let the community know your favorites!
             </p>
-            <a href="/register" class="btn btn-get-started">
+            <a href="/login" class="btn btn-get-started">
               Get Started &nbsp; →
             </a>
+           
           </div>
         </div>
       </div>

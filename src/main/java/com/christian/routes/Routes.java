@@ -1,30 +1,46 @@
 package com.christian.routes;
 
-import com.christian.controllers.AuthenticationController;
-import com.christian.controllers.DashboardController;
-import com.christian.controllers.UserController;
-import com.christian.services.DashboardService;
+import com.christian.controllers.*;
+import com.christian.repository.*;
 import com.christian.dao.*;
-
 import io.javalin.Javalin;
 
 public class Routes {
     private final AuthenticationController authController;
     private final UserController userController;
     private final DashboardController dashboardController;
+    private final AnimeController animeController;
+    private final StudioController studioController;
+    private final GenreController genreController;
 
     public Routes() {
         this.authController = new AuthenticationController();
         this.userController = new UserController();
 
-        // Cria DAOs e service para passar para o DashboardController
+        
         UserDao userDao = new UserDao();
         AnimeDao animeDao = new AnimeDao();
         StudioDao studioDao = new StudioDao();
         GenreDao genreDao = new GenreDao();
-        DashboardService dashboardService = new DashboardService(userDao, animeDao, studioDao, genreDao);
 
-        this.dashboardController = new DashboardController(dashboardService);
+        UserRepository userRepository = new UserRepository(userDao);
+        StudioRepository studioRepository = new StudioRepository(studioDao);
+        GenreRepository genreRepository = new GenreRepository(genreDao);
+        AnimeRepository animeRepository = new AnimeRepository(animeDao, studioRepository, genreRepository);
+
+
+        DashboardRepository dashboardRepository = new DashboardRepository(
+            userRepository,
+            animeRepository,
+            studioRepository,
+            genreRepository
+        );
+
+        
+        this.dashboardController = new DashboardController(dashboardRepository);
+        this.animeController = new AnimeController(animeRepository);
+        this.studioController = new StudioController(studioRepository);
+        this.genreController = new GenreController(genreRepository);
     }
 
     public void registerRoutes(Javalin app) {
@@ -42,15 +58,28 @@ public class Routes {
         app.post("/logout", authController::logout);
 
         // User
-        app.get("/home", userController.home);
-        app.get("/favorites", userController.favorites);
+        app.get("/home", userController::home);
+        app.get("/favorites", userController::favorites);
 
-        // Admin
+        // Dashboard (only admin view)
         app.get("/dashboard", dashboardController::dashboard);
-        app.post("/users/{id}/delete", dashboardController::deleteUser);
-        app.post("/animes/{id}/delete", dashboardController::deleteAnime);
-        app.post("/studios/{id}/delete", dashboardController::deleteStudio);
-        app.post("/genres/{id}/delete", dashboardController::deleteGenre);
 
+        // Animes
+        app.get("/animes/create", animeController::createForm);
+        app.post("/animes/create", animeController::create);
+        app.get("/animes/{id}/edit", animeController::editForm);
+        app.post("/animes/{id}/edit", animeController::edit);
+        app.post("/animes/{id}/delete", animeController::delete);
+
+        // Admin/users
+        app.post("/users/{id}/delete", userController::delete);
+
+        // Admin/studios
+        app.post("/studios/create", studioController::create);
+        app.post("/studios/{id}/delete", studioController::delete);
+
+        // Admin/genres
+        app.post("/genres/create", genreController::create);
+        app.post("/genres/{id}/delete", genreController::delete);
     }
 }
