@@ -23,8 +23,18 @@ public class GenreController {
 
     public void create(Context ctx) {
         Genre genre = new Genre();
+        boolean active = "true".equals(ctx.formParam("active"));
+
         genre.setName(ctx.formParam("name"));
         genreRepository.createGenre(genre);
+
+        System.out.println("active");
+
+        if (active) {
+            ctx.redirect("/anime/create");
+            return;
+        }
+
         ctx.redirect("/dashboard");
     }
 

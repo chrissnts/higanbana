@@ -22,8 +22,16 @@ public class StudioController {
 
     public void create(Context ctx) {
         Studio studio = new Studio();
+        boolean active = "true".equals(ctx.formParam("active"));
+
         studio.setName(ctx.formParam("name"));
         studioRepository.createStudio(studio);
+
+        if (active) {
+            ctx.redirect("/anime/create");
+            return;
+        }
+
         ctx.redirect("/dashboard");
 
     }

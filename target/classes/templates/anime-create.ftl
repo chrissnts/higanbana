@@ -139,7 +139,7 @@
     <div class="modal fade" id="createStudioModal" tabindex="-1" aria-labelledby="createStudioLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form action="/studios/create" method="post" class="modal-content">
-                <div class="modal-header bg-danger text-white">
+                <div class="modal-header btn-danger text-white">
                     <h5 class="modal-title" id="createStudioLabel"><i class="bi bi-plus-circle me-1"></i> Create New Studio</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -153,6 +153,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary rounded-3" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-danger rounded-3">Create Studio</button>
+                    <input type="hidden" id="isActive" name="active" value="true">
                 </div>
             </form>
         </div>
@@ -161,7 +162,7 @@
     <div class="modal fade" id="createGenreModal" tabindex="-1" aria-labelledby="createGenreLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form action="/genres/create" method="post" class="modal-content">
-                <div class="modal-header bg-danger text-white">
+                <div class="modal-header btn-danger text-white">
                     <h5 class="modal-title" id="createGenreLabel"><i class="bi bi-plus-circle me-1"></i> Create New Genre</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -175,6 +176,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary rounded-3" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-danger rounded-3">Create Genre</button>
+                    <input type="hidden" id="isActive" name="active" value="true">
                 </div>
             </form>
         </div>
