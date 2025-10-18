@@ -2,8 +2,12 @@ package com.christian.repository;
 
 import com.christian.dao.StudioDao;
 import com.christian.models.Studio;
+import com.christian.models.User;
+
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StudioRepository {
 
@@ -13,10 +17,9 @@ public class StudioRepository {
         this.studioDao = studioDao;
     }
 
-    public void createStudio(Studio studio){
+    public void createStudio(Studio studio) {
         studioDao.save(studio);
     }
-
 
     public void deleteStudio(int id) {
         studioDao.delete(id);
@@ -30,5 +33,11 @@ public class StudioRepository {
             e.printStackTrace();
             return Collections.emptyList();
         }
+    }
+
+    public Map<String, Object> getStudioModel(User admin) {
+        Map<String, Object> model = new HashMap<>();
+        model.put("admin", admin);
+        return model;
     }
 }

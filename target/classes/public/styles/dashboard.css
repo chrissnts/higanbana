@@ -43,6 +43,17 @@ body {
     color: #2a0404 !important;
 }
 
+ .form-select[multiple] {
+            height: auto;
+            min-height: 120px;
+        }
+        .btn-sm {
+            font-size: 0.875rem;
+        }
+        .card:hover {
+            transform: none !important;
+        }
+
 /* Scrolling horizontal */
 .scrolling-wrapper {
     scroll-snap-type: x mandatory;

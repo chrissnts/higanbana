@@ -75,10 +75,12 @@ public class Routes {
         app.post("/users/{id}/delete", userController::delete);
 
         // Admin/studios
+        app.get("/studios/create", studioController::createForm);
         app.post("/studios/create", studioController::create);
         app.post("/studios/{id}/delete", studioController::delete);
 
         // Admin/genres
+        app.get("/genres/create", genreController::createForm);
         app.post("/genres/create", genreController::create);
         app.post("/genres/{id}/delete", genreController::delete);
     }

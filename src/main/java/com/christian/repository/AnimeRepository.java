@@ -15,7 +15,6 @@ public class AnimeRepository {
     private final StudioRepository studioRepository;
     private final GenreRepository genreRepository;
 
-    // ✅ Corrigido: construtor agora recebe também os repositórios necessários
     public AnimeRepository(AnimeDao animeDao, StudioRepository studioRepository, GenreRepository genreRepository) {
         this.animeDao = animeDao;
         this.studioRepository = studioRepository;
@@ -48,7 +47,6 @@ public class AnimeRepository {
         animeDao.delete(id);
     }
 
-    
     public Map<String, Object> getAnimeModel(User admin) {
         Map<String, Object> model = new HashMap<>();
         model.put("studios", studioRepository.getAllStudios());

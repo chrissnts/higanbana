@@ -15,6 +15,7 @@
 
 <body>
     <form id="logoutForm" action="/logout" method="post" style="display: none;"></form>
+    
     <nav class="navbar navbar-expand-lg py-2 px-3">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center text-white" href="#">
