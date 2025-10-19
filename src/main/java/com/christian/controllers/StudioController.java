@@ -16,7 +16,7 @@ public class StudioController {
     public void createForm(Context ctx) {
         User currentUser = ctx.sessionAttribute("currentUser");
         Map<String, Object> model = studioRepository.getStudioModel(currentUser);
-        ctx.render("studio-create.ftl", model);
+        ctx.render("studio/create.ftl", model);
     }
 
     public void create(Context ctx) {
@@ -46,7 +46,7 @@ public class StudioController {
         User currentUser = ctx.sessionAttribute("currentUser");
         Map<String, Object> model = studioRepository.getStudioModel(currentUser);
         model.put("studio", studio);
-        ctx.render("studio-edit.ftl", model);
+        ctx.render("studio/edit.ftl", model);
     }
 
     public void edit(Context ctx) {
@@ -62,6 +62,23 @@ public class StudioController {
         studioRepository.updateStudio(studio);
         ctx.redirect("/dashboard");
     }
+
+    public void view(Context ctx) {
+    int studioId = Integer.parseInt(ctx.pathParam("id"));
+    Studio studio = studioRepository.findByIdWithAnimes(studioId);
+    if (studio == null) {
+        ctx.status(404).result("Studio not found");
+        return;
+    }
+
+    User currentUser = ctx.sessionAttribute("currentUser");
+
+    Map<String, Object> model = studioRepository.getStudioModel(currentUser);
+    model.put("studio", studio);
+    model.put("admin", currentUser);
+    ctx.render("studio/view.ftl", model);
+}
+
 
     public void delete(Context ctx) {
         int studioId = Integer.parseInt(ctx.pathParam("id"));

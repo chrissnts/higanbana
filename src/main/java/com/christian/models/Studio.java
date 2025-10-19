@@ -1,8 +1,11 @@
 package com.christian.models;
 
+import java.util.List;
+
 public class Studio {
     private Long id;
     private String name;
+      private List<Anime> animes;
 
     public Studio(Long id, String name) {
         this.id = id;
@@ -16,7 +19,7 @@ public class Studio {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = (long) id;
     }
 
@@ -28,9 +31,19 @@ public class Studio {
         this.name = name;
     }
 
+     public List<Anime> getAnimes() {
+        return animes;
+    }
+
+    public void setAnimes(List<Anime> animes) {
+        this.animes = animes;
+    }
+
     @Override
     public String toString() {
         return "Studio [id=" + id + ", name=" + name + "]";
     }
+
+   
 
 }

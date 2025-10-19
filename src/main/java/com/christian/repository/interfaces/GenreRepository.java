@@ -10,6 +10,7 @@ public interface GenreRepository {
     void updateGenre(Genre genre);
     void deleteGenre(int id);
     Genre findById(int id);
+    Genre findByIdWithAnimes(int id);
     List<Genre> getAllGenres();
     Map<String, Object> getGenreModel(User admin);
 }

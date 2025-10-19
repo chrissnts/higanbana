@@ -4,11 +4,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.christian.database.DataBaseConnection;
+import com.christian.models.Anime;
 import com.christian.models.Genre;
 
 public class GenreDao {
 
-    // CREATE
     public void create(Genre genre) {
         String sql = "INSERT INTO genres (name) VALUES (?)";
         try (Connection conn = DataBaseConnection.getConnection();
@@ -22,7 +22,6 @@ public class GenreDao {
         }
     }
 
-    // UPDATE
     public void update(Genre genre) {
         String sql = "UPDATE genres SET name = ? WHERE id = ?";
         try (Connection conn = DataBaseConnection.getConnection();
@@ -37,7 +36,6 @@ public class GenreDao {
         }
     }
 
-    // DELETE
     public void delete(int id) {
         String sql = "DELETE FROM genres WHERE id = ?";
         try (Connection conn = DataBaseConnection.getConnection();
@@ -51,7 +49,6 @@ public class GenreDao {
         }
     }
 
-    // FIND BY ID
     public Genre findById(int id) {
         String sql = "SELECT * FROM genres WHERE id = ?";
         try (Connection conn = DataBaseConnection.getConnection();
@@ -69,7 +66,6 @@ public class GenreDao {
         return null;
     }
 
-    // FIND BY NAME
     public Genre findByName(String name) {
         String sql = "SELECT * FROM genres WHERE name = ?";
         try (Connection conn = DataBaseConnection.getConnection();
@@ -87,7 +83,59 @@ public class GenreDao {
         return null;
     }
 
-    // EXISTS BY NAME
+    public Genre findByIdWithAnimes(int id) {
+        String sqlGenre = "SELECT * FROM genres WHERE id = ?";
+        String sqlAnimes = "SELECT a.* " +
+                "FROM animes a " +
+                "JOIN anime_genres ag ON a.id = ag.anime_id " +
+                "WHERE ag.genre_id = ? " +
+                "ORDER BY a.title ASC";
+
+        Genre genre = null;
+
+        try (Connection conn = DataBaseConnection.getConnection()) {
+
+            try (PreparedStatement stmt = conn.prepareStatement(sqlGenre)) {
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    genre = mapResultSetToGenre(rs);
+                } else {
+                    return null;
+                }
+            }
+
+            try (PreparedStatement stmt = conn.prepareStatement(sqlAnimes)) {
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
+
+                List<Anime> animes = new ArrayList<>();
+                while (rs.next()) {
+                    Anime anime = new Anime();
+                    anime.setId(rs.getInt("id"));
+                    anime.setTitle(rs.getString("title"));
+                    anime.setEpisodesCount(rs.getInt("episodes_count"));
+
+                    Date sqlDate = rs.getDate("release_date");
+                    if (sqlDate != null) {
+                        anime.setReleaseDate(sqlDate.toLocalDate());
+                    }
+
+                    anime.setRating(rs.getDouble("rating"));
+                    anime.setImageUrl(rs.getString("image_url"));
+                    animes.add(anime);
+                }
+
+                genre.setAnimes(animes);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return genre;
+    }
+
     public boolean existsByName(String name) {
         String sql = "SELECT COUNT(*) FROM genres WHERE name = ?";
         try (Connection conn = DataBaseConnection.getConnection();
@@ -105,7 +153,6 @@ public class GenreDao {
         return false;
     }
 
-    // FIND ALL
     public List<Genre> findAll() {
         String sql = "SELECT * FROM genres ORDER BY name ASC";
         List<Genre> genres = new ArrayList<>();
@@ -124,7 +171,6 @@ public class GenreDao {
         return genres;
     }
 
-    // MAP RESULTSET
     private Genre mapResultSetToGenre(ResultSet rs) throws SQLException {
         Genre genre = new Genre();
         genre.setId(rs.getInt("id"));

@@ -1,5 +1,6 @@
 package com.christian.controllers;
 import org.mindrot.jbcrypt.BCrypt;
+
 import com.christian.dao.UserDao;
 import com.christian.models.Role;
 import com.christian.models.User;

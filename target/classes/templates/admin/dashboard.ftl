@@ -15,7 +15,7 @@
 
 <body>
     <form id="logoutForm" action="/logout" method="post" style="display: none;"></form>
-    <#include "partials/navbar.ftl">
+    <#include "../partials/navbar.ftl">
 
     <div class="container-fluid pt-3">
         <div class="row">

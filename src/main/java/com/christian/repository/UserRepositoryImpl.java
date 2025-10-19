@@ -31,7 +31,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User getUserById(int id) {
+    public User findById(int id) {
         return userDao.findById(id);
     }
 

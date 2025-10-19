@@ -33,7 +33,12 @@ public class StudioRepositoryImpl implements StudioRepository {
 
     @Override
     public Studio findById(int id) {
-        return studioDao.findById(id);
+       return studioDao.findById(id);
+    }
+
+    @Override
+    public Studio findByIdWithAnimes(int id){
+        return studioDao.findByIdWithAnimes(id);
     }
 
     @Override

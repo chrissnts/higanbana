@@ -1,4 +1,5 @@
 package com.christian.controllers;
+
 import com.christian.models.Role;
 import com.christian.models.User;
 import com.christian.repository.interfaces.UserRepository;
@@ -23,13 +24,13 @@ public class UserController {
         }
 
         if (currentUser.getRole() == Role.ADMIN) {
-            ctx.redirect("/dashboard");
+            ctx.redirect("admin/dashboard");
             return;
         }
 
         Map<String, Object> model = new HashMap<>();
         model.put("user", currentUser);
-        ctx.render("home.ftl", model);
+        ctx.render("user/home.ftl", model);
     }
 
     public void favorites(Context ctx) {
@@ -42,7 +43,22 @@ public class UserController {
 
         Map<String, Object> model = new HashMap<>();
         model.put("user", currentUser);
-        ctx.render("favorites.ftl", model);
+        ctx.render("user/favorites.ftl", model);
+    }
+
+    public void view(Context ctx) {
+        int userId = Integer.parseInt(ctx.pathParam("id"));
+        User user = userRepository.findById(userId);
+        if (user == null) {
+            ctx.status(404).result("User not found");
+            return;
+        }
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("user", user);
+        User currentUser = ctx.sessionAttribute("currentUser");
+        model.put("admin", currentUser); 
+        ctx.render("user/view.ftl", model);
     }
 
     public void delete(Context ctx) {

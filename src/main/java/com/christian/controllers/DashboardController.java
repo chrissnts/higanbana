@@ -20,6 +20,6 @@ public class DashboardController {
             return;
         }
 
-        ctx.render("dashboard.ftl", dashboardRepository.getDashboardModel(admin));
+        ctx.render("admin/dashboard.ftl", dashboardRepository.getDashboardModel(admin));
     }
 }

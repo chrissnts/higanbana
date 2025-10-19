@@ -15,7 +15,7 @@
 
 
 <body>
-    <#include "partials/navbar.ftl">
+    <#include "../partials/navbar.ftl">
 
     <div class="container mt-5 mb-5">
         <div class="card shadow-lg p-4 border-0 rounded-4">

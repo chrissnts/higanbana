@@ -16,7 +16,7 @@ public class GenreController {
     public void createForm(Context ctx) {
         User currentUser = ctx.sessionAttribute("currentUser");
         Map<String, Object> model = genreRepository.getGenreModel(currentUser);
-        ctx.render("genre-create.ftl", model);
+        ctx.render("genre/create.ftl", model);
     }
 
     public void create(Context ctx) {
@@ -47,7 +47,7 @@ public class GenreController {
         Map<String, Object> model = genreRepository.getGenreModel(currentUser);
         model.put("genre", genre);
 
-        ctx.render("genre-edit.ftl", model);
+        ctx.render("genre/edit.ftl", model);
     }
 
     public void edit(Context ctx) {
@@ -64,6 +64,23 @@ public class GenreController {
 
         ctx.redirect("/dashboard");
     }
+
+    public void view(Context ctx) {
+    int genreId = Integer.parseInt(ctx.pathParam("id"));
+    Genre genre = genreRepository.findByIdWithAnimes(genreId);
+
+    if (genre == null) {
+        ctx.status(404).result("Genre not found");
+        return;
+    }
+
+    User currentUser = ctx.sessionAttribute("currentUser");
+
+    Map<String, Object> model = genreRepository.getGenreModel(currentUser);
+    model.put("genre", genre);
+    model.put("admin", currentUser); 
+    ctx.render("genre/view.ftl", model);
+}
 
     public void delete(Context ctx) {
         int genreId = Integer.parseInt(ctx.pathParam("id"));

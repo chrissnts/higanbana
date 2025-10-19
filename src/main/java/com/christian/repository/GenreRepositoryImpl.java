@@ -37,6 +37,11 @@ public class GenreRepositoryImpl implements GenreRepository {
     }
 
     @Override
+    public Genre findByIdWithAnimes(int id){
+        return genreDao.findByIdWithAnimes(id);
+    }
+
+    @Override
     public List<Genre> getAllGenres() {
         try {
             List<Genre> genres = genreDao.findAll();

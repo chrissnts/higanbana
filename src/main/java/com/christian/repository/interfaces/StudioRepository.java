@@ -1,6 +1,5 @@
 package com.christian.repository.interfaces;
 
-
 import com.christian.models.Studio;
 import com.christian.models.User;
 import java.util.List;
@@ -11,6 +10,7 @@ public interface StudioRepository {
     void updateStudio(Studio studio);
     void deleteStudio(int id);
     Studio findById(int id);
+    Studio findByIdWithAnimes(int id);
     List<Studio> getAllStudios();
     Map<String, Object> getStudioModel(User admin);
 }

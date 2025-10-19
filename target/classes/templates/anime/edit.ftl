@@ -13,23 +13,15 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg py-2 px-3">
-        <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center text-white" href="/dashboard">
-                <img src="/img/tokyoFlower.png" alt="Logo" class="rounded-circle me-2"
-                    style="width: 35px; height: 35px" />
-                <strong>Higanbana</strong>
-            </a>
-        </div>
-    </nav>
-
+    
+     <#include "../partials/navbar.ftl">
     <div class="container mt-5 mb-5">
         <div class="card shadow-lg p-4 border-0 rounded-4">
             <h4 class="fw-bold mb-4 text-uppercase text-red">
                 <i class="bi bi-pencil-square me-2"></i> Edit Anime
             </h4>
 
-            <form action="/animes/update/${anime.id}" method="post" enctype="multipart/form-data">
+            <form action="/animes/${anime.id}/edit" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="${anime.id}" />
 
                 <div class="row g-3">
