@@ -1,17 +1,23 @@
 package com.christian.repository;
 
 import com.christian.models.User;
+import com.christian.repository.interfaces.AnimeRepository;
+import com.christian.repository.interfaces.StudioRepository;
+import com.christian.repository.interfaces.GenreRepository;
+import com.christian.repository.interfaces.UserRepository;
+import com.christian.repository.interfaces.DashboardRepository;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class DashboardRepository {
+public class DashboardRepositoryImpl implements DashboardRepository {
 
     private final UserRepository userRepository;
     private final AnimeRepository animeRepository;
     private final StudioRepository studioRepository;
     private final GenreRepository genreRepository;
 
-    public DashboardRepository(
+    public DashboardRepositoryImpl(
             UserRepository userRepository,
             AnimeRepository animeRepository,
             StudioRepository studioRepository,
@@ -23,6 +29,7 @@ public class DashboardRepository {
         this.genreRepository = genreRepository;
     }
 
+    @Override
     public Map<String, Object> getDashboardModel(User admin) {
         Map<String, Object> model = new HashMap<>();
         model.put("admin", admin);

@@ -1,8 +1,10 @@
 package com.christian.routes;
 
 import com.christian.controllers.*;
-import com.christian.repository.*;
 import com.christian.dao.*;
+import com.christian.models.*;
+import com.christian.repository.*;
+import com.christian.repository.interfaces.*;
 import io.javalin.Javalin;
 
 public class Routes {
@@ -14,29 +16,20 @@ public class Routes {
     private final GenreController genreController;
 
     public Routes() {
-        this.authController = new AuthenticationController();
-        this.userController = new UserController();
 
-        
+        this.authController = new AuthenticationController();
         UserDao userDao = new UserDao();
+        UserRepository userRepository = new UserRepositoryImpl(userDao);
+        this.userController = new UserController(userRepository);
         AnimeDao animeDao = new AnimeDao();
         StudioDao studioDao = new StudioDao();
         GenreDao genreDao = new GenreDao();
 
-        UserRepository userRepository = new UserRepository(userDao);
-        StudioRepository studioRepository = new StudioRepository(studioDao);
-        GenreRepository genreRepository = new GenreRepository(genreDao);
-        AnimeRepository animeRepository = new AnimeRepository(animeDao, studioRepository, genreRepository);
+        StudioRepository studioRepository = new StudioRepositoryImpl(studioDao);
+        GenreRepository genreRepository = new GenreRepositoryImpl(genreDao);
+        AnimeRepository animeRepository = new AnimeRepositoryImpl(animeDao, studioRepository, genreRepository);
+        DashboardRepository dashboardRepository = new DashboardRepositoryImpl(userRepository, animeRepository,studioRepository, genreRepository);
 
-
-        DashboardRepository dashboardRepository = new DashboardRepository(
-            userRepository,
-            animeRepository,
-            studioRepository,
-            genreRepository
-        );
-
-        
         this.dashboardController = new DashboardController(dashboardRepository);
         this.animeController = new AnimeController(animeRepository);
         this.studioController = new StudioController(studioRepository);
@@ -44,6 +37,7 @@ public class Routes {
     }
 
     public void registerRoutes(Javalin app) {
+        
         // Landing Page
         app.get("/", ctx -> ctx.render("index.ftl"));
         app.get("/about", ctx -> ctx.render("about.ftl"));
@@ -61,7 +55,7 @@ public class Routes {
         app.get("/home", userController::home);
         app.get("/favorites", userController::favorites);
 
-        // Dashboard (only admin view)
+        // Dashboard (admin)
         app.get("/dashboard", dashboardController::dashboard);
 
         // Animes
@@ -77,11 +71,15 @@ public class Routes {
         // Admin/studios
         app.get("/studios/create", studioController::createForm);
         app.post("/studios/create", studioController::create);
+        app.get("/studios/{id}/edit", studioController::editForm);
+        app.post("/studios/{id}/edit", studioController::edit);
         app.post("/studios/{id}/delete", studioController::delete);
 
         // Admin/genres
         app.get("/genres/create", genreController::createForm);
         app.post("/genres/create", genreController::create);
+        app.get("/genres/{id}/edit", genreController::editForm);
+        app.post("/genres/{id}/edit", genreController::edit);
         app.post("/genres/{id}/delete", genreController::delete);
     }
 }

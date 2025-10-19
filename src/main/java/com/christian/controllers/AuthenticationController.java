@@ -1,6 +1,5 @@
 package com.christian.controllers;
 import org.mindrot.jbcrypt.BCrypt;
-
 import com.christian.dao.UserDao;
 import com.christian.models.Role;
 import com.christian.models.User;
@@ -33,7 +32,7 @@ public class AuthenticationController  {
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
         User newUser = new User(username, email, hashedPassword, Role.USER);
-        userDao.save(newUser);
+        userDao.create(newUser);
 
         ctx.redirect("/login");
     }

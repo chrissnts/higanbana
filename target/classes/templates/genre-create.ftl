@@ -13,16 +13,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg py-2 px-3">
-        <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center text-white" href="/dashboard">
-                <img src="/img/tokyoFlower.png" alt="Logo" class="rounded-circle me-2"
-                    style="width: 35px; height: 35px" />
-                <strong>Higanbana Admin</strong>
-            </a>
-        </div>
-    </nav>
-
+   <#include "partials/navbar.ftl">
     <div class="container mt-5 mb-5">
         <div class="card shadow-lg p-4 border-0 rounded-4">
             <h4 class="fw-bold mb-4 text-uppercase text-red">

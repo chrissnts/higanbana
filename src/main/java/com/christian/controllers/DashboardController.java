@@ -1,8 +1,7 @@
 package com.christian.controllers;
-
 import com.christian.models.Role;
 import com.christian.models.User;
-import com.christian.repository.DashboardRepository;
+import com.christian.repository.interfaces.DashboardRepository;
 import io.javalin.http.Context;
 
 public class DashboardController {

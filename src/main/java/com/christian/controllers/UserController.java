@@ -1,10 +1,8 @@
 package com.christian.controllers;
-
 import com.christian.models.Role;
 import com.christian.models.User;
-import com.christian.repository.UserRepository;
+import com.christian.repository.interfaces.UserRepository;
 import io.javalin.http.Context;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,15 +10,10 @@ public class UserController {
 
     private final UserRepository userRepository;
 
-    public UserController() {
-        this.userRepository = null;
-    }
-
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    
     public void home(Context ctx) {
         User currentUser = ctx.sessionAttribute("currentUser");
 
@@ -39,7 +32,6 @@ public class UserController {
         ctx.render("home.ftl", model);
     }
 
-    
     public void favorites(Context ctx) {
         User currentUser = ctx.sessionAttribute("currentUser");
 
@@ -53,13 +45,7 @@ public class UserController {
         ctx.render("favorites.ftl", model);
     }
 
-    
     public void delete(Context ctx) {
-        if (userRepository == null) {
-            ctx.status(500).result("UserRepository não inicializado");
-            return;
-        }
-
         int userId = Integer.parseInt(ctx.pathParam("id"));
         userRepository.deleteUser(userId);
         ctx.redirect("/dashboard");

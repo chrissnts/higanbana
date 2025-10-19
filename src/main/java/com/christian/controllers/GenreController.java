@@ -1,10 +1,8 @@
 package com.christian.controllers;
-
 import java.util.Map;
-
 import com.christian.models.Genre;
 import com.christian.models.User;
-import com.christian.repository.GenreRepository;
+import com.christian.repository.interfaces.GenreRepository;
 import io.javalin.http.Context;
 
 public class GenreController {
@@ -28,12 +26,41 @@ public class GenreController {
         genre.setName(ctx.formParam("name"));
         genreRepository.createGenre(genre);
 
-        System.out.println("active");
-
         if (active) {
-            ctx.redirect("/anime/create");
+            ctx.redirect("/animes/create");
             return;
         }
+
+        ctx.redirect("/dashboard");
+    }
+
+    public void editForm(Context ctx) {
+        int genreId = Integer.parseInt(ctx.pathParam("id"));
+        Genre genre = genreRepository.findById(genreId);
+
+        if (genre == null) {
+            ctx.status(404).result("Genre not found");
+            return;
+        }
+
+        User currentUser = ctx.sessionAttribute("currentUser");
+        Map<String, Object> model = genreRepository.getGenreModel(currentUser);
+        model.put("genre", genre);
+
+        ctx.render("genre-edit.ftl", model);
+    }
+
+    public void edit(Context ctx) {
+        int genreId = Integer.parseInt(ctx.pathParam("id"));
+        Genre genre = genreRepository.findById(genreId);
+
+        if (genre == null) {
+            ctx.status(404).result("Genre not found");
+            return;
+        }
+
+        genre.setName(ctx.formParam("name"));
+        genreRepository.updateGenre(genre);
 
         ctx.redirect("/dashboard");
     }

@@ -1,9 +1,8 @@
 package com.christian.controllers;
-
 import java.util.Map;
 import com.christian.models.Studio;
 import com.christian.models.User;
-import com.christian.repository.StudioRepository;
+import com.christian.repository.interfaces.StudioRepository;
 import io.javalin.http.Context;
 
 public class StudioController {
@@ -28,12 +27,40 @@ public class StudioController {
         studioRepository.createStudio(studio);
 
         if (active) {
-            ctx.redirect("/anime/create");
+            ctx.redirect("/animes/create");
             return;
         }
 
         ctx.redirect("/dashboard");
+    }
 
+    public void editForm(Context ctx) {
+        int studioId = Integer.parseInt(ctx.pathParam("id"));
+        Studio studio = studioRepository.findById(studioId);
+
+        if (studio == null) {
+            ctx.status(404).result("Studio not found");
+            return;
+        }
+
+        User currentUser = ctx.sessionAttribute("currentUser");
+        Map<String, Object> model = studioRepository.getStudioModel(currentUser);
+        model.put("studio", studio);
+        ctx.render("studio-edit.ftl", model);
+    }
+
+    public void edit(Context ctx) {
+        int studioId = Integer.parseInt(ctx.pathParam("id"));
+        Studio studio = studioRepository.findById(studioId);
+
+        if (studio == null) {
+            ctx.status(404).result("Studio not found");
+            return;
+        }
+
+        studio.setName(ctx.formParam("name"));
+        studioRepository.updateStudio(studio);
+        ctx.redirect("/dashboard");
     }
 
     public void delete(Context ctx) {

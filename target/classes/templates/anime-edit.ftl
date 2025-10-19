@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Anime - Higanbana Admin</title>
+    <title>Edit Anime - Higanbana Admin</title>
     <link rel="icon" type="image/png" href="/img/tokyoFlower.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -13,42 +13,50 @@
 </head>
 
 <body>
-  <#include "partials/navbar.ftl">
+    <nav class="navbar navbar-expand-lg py-2 px-3">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center text-white" href="/dashboard">
+                <img src="/img/tokyoFlower.png" alt="Logo" class="rounded-circle me-2"
+                    style="width: 35px; height: 35px" />
+                <strong>Higanbana</strong>
+            </a>
+        </div>
+    </nav>
 
     <div class="container mt-5 mb-5">
         <div class="card shadow-lg p-4 border-0 rounded-4">
             <h4 class="fw-bold mb-4 text-uppercase text-red">
-                <i class="bi bi-folder-plus me-2"></i> Create New Anime
+                <i class="bi bi-pencil-square me-2"></i> Edit Anime
             </h4>
 
-            <form action="/animes/create" method="post" enctype="multipart/form-data">
-                <div class="row g-3">
+            <form action="/animes/update/${anime.id}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="${anime.id}" />
 
+                <div class="row g-3">
                     <div class="col-md-6">
                         <label for="title" class="form-label fw-bold">
                             <i class="bi bi-type me-1"></i> Title
                         </label>
-                        <input type="text" class="form-control" id="title" name="title"
-                            placeholder="e.g., Attack on Titan" required />
+                        <input type="text" class="form-control" id="title" name="title" value="${anime.title}"
+                            required />
                     </div>
-
 
                     <div class="col-md-2">
                         <label for="episodesCount" class="form-label fw-bold">
                             <i class="bi bi-hash me-1"></i> Episodes
                         </label>
-                        <input type="number" class="form-control" id="episodesCount" name="episodesCount" min="1"
-                            required />
+                        <input type="number" class="form-control" id="episodesCount" name="episodesCount"
+                            value="${anime.episodesCount}" min="1" required />
                     </div>
 
                     <div class="col-md-2">
                         <label for="releaseDate" class="form-label fw-bold">
                             <i class="bi bi-calendar-event me-1"></i> Release Date
                         </label>
-                        <input type="date" class="form-control" id="releaseDate" name="releaseDate" required />
+                        <input type="date" class="form-control" id="releaseDate" name="releaseDate"
+                            value="${anime.releaseDate}" required />
                     </div>
-                    
-                    
+
                     <div class="col-md-6">
                         <label for="studio" class="form-label fw-bold">
                             <i class="bi bi-building me-1"></i> Studio
@@ -57,7 +65,10 @@
                             <select class="form-select" id="studio" name="studioId" required>
                                 <option value="">Select Studio</option>
                                 <#list studios as studio>
-                                    <option value="${studio.id}">${studio.name}</option>
+                                    <option value="${studio.id}" <#if anime.studio?? && anime.studio.id==studio.id>
+                                        selected</#if>>
+                                        ${studio.name}
+                                    </option>
                                 </#list>
                             </select>
                             <button type="button" class="btn btn-danger text-white rounded-end-2" data-bs-toggle="modal"
@@ -67,45 +78,46 @@
                         </div>
                     </div>
 
-
                     <div class="col-md-6">
                         <label for="genres" class="form-label fw-bold">
-                            <i class="bi bi-tags-fill me-1"></i> Genres (Hold Ctrl/Cmd)
+                            <i class="bi bi-tags-fill me-1"></i> Genres
                         </label>
                         <div class="input-group">
-                             <select class="form-select" id="genres" name="genreIds" multiple required
-                                 style="height: 120px;"> <#list genres as genre>
-                                     <option value="${genre.id}">${genre.name}</option>
-                                 </#list>
-                             </select>
-                             <button type="button" class="btn btn-danger text-white rounded-end-2 m-2 align-self-start" data-bs-toggle="modal"
-                                data-bs-target="#createGenreModal" style="height: 38px;">
+                            <select class="form-select" id="genres" name="genreIds" multiple required
+                                style="height: 120px;">
+                                <#list genres as genre>
+                                    <option value="${genre.id}" <#list anime.genres as ag>
+                                        <#if ag.id==genre.id>selected</#if>
+                                </#list>>
+                                ${genre.name}
+                                </option>
+                                </#list>
+                            </select>
+                            <button type="button" class="btn btn-danger text-white rounded-end-2 m-2 align-self-start"
+                                data-bs-toggle="modal" data-bs-target="#createGenreModal" style="height: 38px;">
                                 <i class="bi bi-plus me-1"></i> New
                             </button>
                         </div>
                     </div>
-                    
-                    
+
                     <div class="col-12">
                         <hr class="text-red opacity-50 my-4">
                     </div>
-
 
                     <div class="col-12">
                         <label for="synopsis" class="form-label fw-bold">
                             <i class="bi bi-book-half me-1"></i> Synopsis
                         </label>
-                        <textarea class="form-control" id="synopsis" name="synopsis" rows="4"
-                            placeholder="Enter a brief synopsis..." required></textarea>
+                        <textarea class="form-control" id="synopsis" name="synopsis" rows="4" required> ${anime.synopsis}
+                        </textarea>
                     </div>
-
 
                     <div class="col-md-6">
                         <label for="imageUrl" class="form-label fw-bold">
                             <i class="bi bi-link-45deg me-1"></i> Image URL
                         </label>
                         <input type="url" class="form-control" id="imageUrl" name="imageUrl"
-                            placeholder="https://example.com/anime.jpg" />
+                            value="${anime.imageUrl}" />
                     </div>
 
                     <div class="col-md-6">
@@ -118,10 +130,10 @@
 
                 <div class="mt-5 d-flex justify-content-between">
                     <a href="/dashboard" class="btn btn-danger fw-bold px-5 rounded-3 shadow-sm">
-                        <i class="bi bi-arrow-left me-1"></i> Back
+                        <i class="bi bi-arrow-left me-1"></i> Cancel
                     </a>
                     <button type="submit" class="btn btn-danger fw-bold px-5 rounded-3 shadow-sm">
-                        <i class="bi bi-save-fill me-1"></i> Save Anime
+                        <i class="bi bi-save-fill me-1"></i> Update Anime
                     </button>
                 </div>
             </form>
@@ -133,8 +145,10 @@
         <div class="modal-dialog">
             <form action="/studios/create" method="post" class="modal-content">
                 <div class="modal-header btn-danger text-white">
-                    <h5 class="modal-title" id="createStudioLabel"><i class="bi bi-plus-circle me-1"></i> Create New Studio</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="createStudioLabel"><i class="bi bi-plus-circle me-1"></i> Create New
+                        Studio</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
@@ -156,8 +170,10 @@
         <div class="modal-dialog">
             <form action="/genres/create" method="post" class="modal-content">
                 <div class="modal-header btn-danger text-white">
-                    <h5 class="modal-title" id="createGenreLabel"><i class="bi bi-plus-circle me-1"></i> Create New Genre</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="createGenreLabel"><i class="bi bi-plus-circle me-1"></i> Create New
+                        Genre</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
@@ -177,7 +193,6 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>
