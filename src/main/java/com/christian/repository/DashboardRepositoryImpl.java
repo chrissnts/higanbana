@@ -17,12 +17,8 @@ public class DashboardRepositoryImpl implements DashboardRepository {
     private final StudioRepository studioRepository;
     private final GenreRepository genreRepository;
 
-    public DashboardRepositoryImpl(
-            UserRepository userRepository,
-            AnimeRepository animeRepository,
-            StudioRepository studioRepository,
-            GenreRepository genreRepository
-    ) {
+    public DashboardRepositoryImpl(UserRepository userRepository, AnimeRepository animeRepository, StudioRepository studioRepository,GenreRepository genreRepository) {
+
         this.userRepository = userRepository;
         this.animeRepository = animeRepository;
         this.studioRepository = studioRepository;
@@ -37,6 +33,11 @@ public class DashboardRepositoryImpl implements DashboardRepository {
         model.put("animes", animeRepository.getAllAnimes());
         model.put("studios", studioRepository.getAllStudios());
         model.put("genres", genreRepository.getAllGenres());
+        model.put("totalAnimes", animeRepository.count());
+        model.put("totalUsers", userRepository.count());
+        model.put("totalGenres", genreRepository.count());
+        model.put("totalStudios", studioRepository.count());
+
         return model;
     }
 }

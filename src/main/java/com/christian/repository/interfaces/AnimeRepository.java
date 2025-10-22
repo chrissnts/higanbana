@@ -9,6 +9,7 @@ public interface AnimeRepository {
     void createAnime(Anime anime);
     void updateAnime(Anime anime);
     void deleteAnime(int id);
+    int count();
     Anime findById(int id);
     List<Anime> getAllAnimes();
     List<Anime> searchAnimesByTitle(String title);

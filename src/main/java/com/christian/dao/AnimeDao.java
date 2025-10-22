@@ -80,6 +80,22 @@ public class AnimeDao {
         }
     }
 
+    public int count() {
+        String sql = "SELECT COUNT(*) AS total FROM animes";
+        try (Connection conn = DataBaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public Anime findById(int id) {
         String sql = "SELECT a.*, s.id AS studio_id, s.name AS studio_name " +
                 "FROM animes a " +
@@ -88,7 +104,6 @@ public class AnimeDao {
 
         try (Connection conn = DataBaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
-
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -199,7 +214,7 @@ public class AnimeDao {
     private void insertAnimeGenres(Anime anime) {
         if (anime.getGenres() == null)
             return;
-        String sql = "INSERT INTO anime_genre (anime_id, genre_id) VALUES (?, ?)";
+        String sql = "INSERT INTO anime_genres (anime_id, genre_id) VALUES (?, ?)";
 
         try (Connection conn = DataBaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -217,7 +232,7 @@ public class AnimeDao {
     }
 
     private void deleteAnimeGenres(long animeId) {
-        String sql = "DELETE FROM anime_genre WHERE anime_id = ?";
+        String sql = "DELETE FROM anime_genres WHERE anime_id = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {

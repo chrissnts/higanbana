@@ -49,6 +49,22 @@ public class StudioDao {
         }
     }
 
+    public int count() {
+        String sql = "SELECT COUNT(*) AS total FROM studios";
+        try (Connection conn = DataBaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public Studio findById(int id) {
         String sql = "SELECT * FROM studios WHERE id = ?";
         try (Connection conn = DataBaseConnection.getConnection();

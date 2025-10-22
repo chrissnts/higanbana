@@ -32,6 +32,11 @@ public class StudioRepositoryImpl implements StudioRepository {
     }
 
     @Override
+    public int count(){
+        return studioDao.count();
+    }
+
+    @Override
     public Studio findById(int id) {
        return studioDao.findById(id);
     }

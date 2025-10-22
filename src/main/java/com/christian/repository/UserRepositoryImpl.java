@@ -31,6 +31,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public int count(){
+        return userDao.count();
+    }
+
+    @Override
     public User findById(int id) {
         return userDao.findById(id);
     }

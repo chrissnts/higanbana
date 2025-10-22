@@ -9,6 +9,7 @@ public interface GenreRepository {
     void createGenre(Genre genre);
     void updateGenre(Genre genre);
     void deleteGenre(int id);
+    int count();
     Genre findById(int id);
     Genre findByIdWithAnimes(int id);
     List<Genre> getAllGenres();

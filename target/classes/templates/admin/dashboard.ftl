@@ -237,9 +237,11 @@
             <div class="col-md-3 ps-2 pe-4">
                 <div class="stats-card">
                     <h5 class="fw-bold mb-4 text-uppercase">QUICK STATS</h5>
-                    <p class="mb-2">Total Anime <span class="float-end fw-bold text-accent">5,231</span></p>
-                    <p class="mb-2">Total Users <span class="float-end fw-bold">150,890</span></p>
-                    <p class="mb-0">New Reviews Today <span class="float-end fw-bold text-accent">457</span></p>
+                    <p class="mb-2">Total Anime <span class="float-end fw-bold text-accent">${totalAnimes}</span></p>
+                    <p class="mb-2">Total Users <span class="float-end fw-bold">${totalUsers}</span></p>
+                     <p class="mb-2">Total Genres <span class="float-end fw-bold">${totalGenres}</span></p>
+                      <p class="mb-2">Total Studios <span class="float-end fw-bold">${totalStudios}</span></p>
+                    <p class="mb-0">New Reviews Today <span class="float-end fw-bold text-accent"></span></p>
                 </div>
 
                 <div class="activity-card">
@@ -249,9 +251,8 @@
                     <p class="text-secondary mb-3" style="font-size: 0.9rem">• User <span
                             class="text-accent">"admin121"</span> added <span class="text-accent">"Jujutsu
                             Kaisen"</span></p>
-                    <p class="text-secondary mb-3" style="font-size: 0.9rem">• New user registered: <span
-                            class="text-accent">"animefan99"</span> <br /><span class="text-muted"
-                            style="font-size: 0.7rem">(2014-AB) 2H15</span></p>
+                  
+                            
                 </div>
             </div>
         </div>

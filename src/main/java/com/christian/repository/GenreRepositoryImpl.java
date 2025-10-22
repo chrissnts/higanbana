@@ -32,6 +32,11 @@ public class GenreRepositoryImpl implements GenreRepository {
     }
 
     @Override
+    public int count(){
+        return genreDao.count();
+    }
+
+    @Override
     public Genre findById(int id) {
         return genreDao.findById(id);
     }

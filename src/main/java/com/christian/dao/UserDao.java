@@ -16,7 +16,7 @@ public class UserDao {
         String sql = "INSERT INTO users (user_name, email, password, role_id, profile_image) VALUES (?,?,?,?,?)";
 
         try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, user.getUserName());
             stmt.setString(2, user.getEmail());
@@ -34,7 +34,7 @@ public class UserDao {
         String sql = "UPDATE users SET user_name = ?, email = ?, password = ?, role_id = ?, profile_image = ? WHERE id = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, user.getUserName());
             stmt.setString(2, user.getEmail());
@@ -53,7 +53,7 @@ public class UserDao {
         String sql = "DELETE FROM users WHERE id = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -67,7 +67,7 @@ public class UserDao {
         String sql = "SELECT * FROM users WHERE id = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -81,12 +81,28 @@ public class UserDao {
         return null;
     }
 
+    public int count() {
+        String sql = "SELECT COUNT(*) AS total FROM users WHERE role_id != 1";
+        try (Connection conn = DataBaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public List<User> findAll() {
         String sql = "SELECT * FROM users WHERE role_id != 1";
         List<User> users = new ArrayList<>();
 
         try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -103,7 +119,7 @@ public class UserDao {
         String sql = "SELECT * FROM users WHERE email = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();

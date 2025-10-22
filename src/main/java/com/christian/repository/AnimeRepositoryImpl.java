@@ -38,6 +38,11 @@ public class AnimeRepositoryImpl implements AnimeRepository {
     }
 
     @Override
+    public int count(){
+        return animeDao.count();
+    }
+
+    @Override
     public Anime findById(int id) {
         return animeDao.findById(id);
     }

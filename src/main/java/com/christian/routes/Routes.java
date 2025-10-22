@@ -2,7 +2,6 @@ package com.christian.routes;
 
 import com.christian.controllers.*;
 import com.christian.dao.*;
-import com.christian.models.*;
 import com.christian.repository.*;
 import com.christian.repository.interfaces.*;
 import io.javalin.Javalin;

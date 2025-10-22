@@ -9,6 +9,7 @@ public interface StudioRepository {
     void createStudio(Studio studio);
     void updateStudio(Studio studio);
     void deleteStudio(int id);
+    int count();
     Studio findById(int id);
     Studio findByIdWithAnimes(int id);
     List<Studio> getAllStudios();
