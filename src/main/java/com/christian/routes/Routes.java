@@ -54,12 +54,11 @@ public class Routes {
         // User
         app.get("/home", userController::home);
         app.get("/favorites", userController::favorites);
-        app.get("/users/{id}/view", userController::view);
-
+        
         // Dashboard (admin)
         app.get("/dashboard", dashboardController::dashboard);
 
-        // Animes
+        // Admin/Animes
         app.get("/animes/create", animeController::createForm);
         app.post("/animes/create", animeController::create);
         app.get("/animes/{id}/edit", animeController::editForm);
@@ -68,9 +67,11 @@ public class Routes {
         app.post("/animes/{id}/delete", animeController::delete);
 
         // Admin/users
-        app.post("/users/{id}/delete", userController::delete);
         // app.get("/users/{id}/edit", userController::editForm);
         // app.post("/users/{id}/edit", userController::edit);
+        app.get("/users/{id}/view", userController::view);
+        app.post("/users/{id}/delete", userController::delete);
+        
 
         // Admin/studios
         app.get("/studios/create", studioController::createForm);
