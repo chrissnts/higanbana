@@ -110,12 +110,11 @@
                     </ul>
                 </div>
 
-                <!-- Imagem menor -->
                 <div class="col-lg-4 text-center">
-                    <label class="form-label fw-bold"><i class="bi bi-image me-1"></i> Profile Image</label>
+                    <label class="form-label fw-bold d-block mb-2"><i class="bi bi-image me-1"></i> Profile Image</label>
                     <#if user.profileImage?? && (user.profileImage != "")>
                         <img src="${user.profileImage}" alt="${user.userName! "Profile Image"}" 
-                             class="img-thumbnail rounded-3 border" 
+                             class="img-thumbnail rounded-3 border mx-auto d-block" 
                              style="max-height: 250px; width: auto;" />
                     <#else>
                         <p class="text-muted mt-2">No Image</p>

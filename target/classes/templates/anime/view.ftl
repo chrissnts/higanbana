@@ -81,7 +81,7 @@
                     </ul>
                 </div>
 
-                <!-- Imagem centralizada -->
+
                 <div class="col-lg-4 text-center">
                     <label class="form-label fw-bold d-block mb-2"><i class="bi bi-image me-1"></i> Image</label>
                     <#if anime.imageUrl?? && (anime.imageUrl != "")>
