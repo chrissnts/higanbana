@@ -50,6 +50,7 @@ body {
 .btn-danger {
   background-color: #2a0404 !important;
   border-color: #2a0404 !important;
+  box-shadow: none !important;
 }
 
 .bg-anime {
@@ -128,3 +129,4 @@ body {
 .text-red {
   color: #2a0404 !important;
 }
+

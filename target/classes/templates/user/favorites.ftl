@@ -14,214 +14,81 @@
 </head>
 
 <body>
- 
-  <nav class="navbar navbar-expand-lg py-2 px-3">
-    <div class="container-fluid">
 
-      <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center text-white" href="/home">
-        <img src="/img/tokyoFlower.png" alt="Logo" class="rounded-circle me-2" style="width:35px;height:35px;" />
-        <strong>Higanbana</strong>
-      </a>
+  <#include "../partials/navbaruser.ftl">
 
-      <!-- Toggle -->
-      <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAnime"
-        aria-controls="navbarAnime" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <div class="container mt-4">
+      <h2 class="text-center">Favorites</h2>
 
-      <!-- Navbar links -->
-      <div class="collapse navbar-collapse" id="navbarAnime">
-        <ul class="navbar-nav ms-auto align-items-center mb-2 mb-lg-0">
+      <ul class="nav nav-tabs justify-content-center mt-4" id="favoritesTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active btn-color text-light" id="animes-tab" data-bs-toggle="tab"
+            data-bs-target="#animes" type="button" role="tab">Animes</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link btn-color text-light" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews"
+            type="button" role="tab">Reviews</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link btn-color text-light" id="lists-tab" data-bs-toggle="tab" data-bs-target="#lists"
+            type="button" role="tab">Lists</button>
+        </li>
+      </ul>
 
-          <li class="nav-item me-3">
-            <a class="nav-link text-uppercase fw-bold text-white" href="/animes">ANIMES</a>
-          </li>
+      <div class="tab-content mt-4" id="favoritesTabsContent">
 
-          <li class="nav-item me-3">
-            <a class="nav-link text-uppercase fw-bold text-white" href="/watchlist">WATCHLIST</a>
-          </li>
-
-          <li class="nav-item me-3">
-            <button class="btn btn-danger btn-sm px-3 fw-bold">+ LOG</button>
-          </li>
-
-          <!-- Search -->
-          <form class="d-flex gap-2 my-2 me-4" role="search">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="width:150px;" />
-            <button class="btn btn-danger" type="submit">Search</button>
-          </form>
-
-          <!-- User Dropdown -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="navbarUser"
-              role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="${user.profileImage}" alt="Avatar" class="rounded-circle me-2" width="35" height="35" />
-              <span class="fw-bold text-uppercase">${user.userName}</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end text-white">
-              <li><a class="dropdown-item" href="/profile">Profile</a></li>
-              <li><a class="dropdown-item" href="/favorites">Favorites</a></li>
-              <li><a class="dropdown-item" href="/activity">Activity</a></li>
-              <li><a class="dropdown-item" href="/settings">Settings</a></li>
-              <hr>
-              <li>
-                <form action="/logout" method="post" class="d-inline">
-                  <button type="submit" class="dropdown-item">Sign Out</button>
-                </form>
-              </li>
-            </ul>
-          </li>
-
-        </ul>
-      </div>
-
-    </div>
-  </nav>
- 
-
-  <div class="container mt-4">
-    <h2 class="text-center">Favorites</h2>
-    
-    <ul class="nav nav-tabs justify-content-center mt-4" id="favoritesTabs" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active btn-color text-light" id="animes-tab" data-bs-toggle="tab" data-bs-target="#animes" type="button"
-          role="tab">Animes</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link btn-color text-light" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button"
-          role="tab">Reviews</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link btn-color text-light" id="lists-tab" data-bs-toggle="tab" data-bs-target="#lists" type="button"
-          role="tab">Lists</button>
-      </li>
-    </ul>
-
-    <div class="tab-content mt-4" id="favoritesTabsContent">
-
-      <div class="tab-pane fade show active" id="animes" role="tabpanel">
-
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4 justify-content-center">
-
-          <div class="col">
-            <div class="card bg-anime text-white border-0" style="max-width: 160px;">
-              <img src="https://m.media-amazon.com/images/I/6103u5u-alL.jpg" alt="Death Note" class="img-fluid rounded">
-              <div class="card-body text-center p-2">
-                <div class="stars mb-1" style="font-size: 0.85rem;">⭐⭐⭐⭐⭐</div>
-                <div class="text-danger" style="font-size: 1rem;">❤</div>
+        <div class="tab-pane fade show active" id="animes" role="tabpanel">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4 justify-content-center">
+            <#list favorites as anime>
+              <div class="col">
+                <a href="/anime/${anime.id}" class="text-decoration-none">
+                  <div class="card bg-anime text-white border-0 h-100" style="cursor:pointer; max-width:200px;">
+                    <div class="m-2" style="height:200px; overflow:hidden;">
+                      <img src="${anime.imageUrl}" alt="${anime.title}" class="img-fluid w-100 h-100"
+                        style="object-fit:cover;">
+                    </div>
+                    <div class="card-body text-center d-flex flex-column justify-content-between" style="height:80px;">
+                      <h6 class="card-title text-white fw-bold mb-1"
+                        style="font-size:0.9rem; height:2.4em; line-height:1.2em; overflow:hidden; text-overflow:ellipsis;">
+                        ${anime.title}
+                      </h6>
+                      <div class="stars mb-1" style="font-size:0.85rem;">
+                        <#assign rating=userRatings[anime.id]!0>
+                            <#list 1..5 as i>
+                              <#if i <=rating>
+                                ⭐
+                                <#elseif i - rating==0.5>
+                                  ⯨
+                                  <#else>
+                                    ☆
+                              </#if>
+                            </#list>
+                      </div>
+                      <div class="text-danger" style="font-size: 1rem;">❤</div>
+                    </div>
+                  </div>
+                </a>
               </div>
-            </div>
-          </div>
-
-           <div class="col">
-            <div class="card bg-anime text-white border-0" style="max-width: 160px;">
-              <img src="https://m.media-amazon.com/images/M/MV5BZWZlMTFjNDgtYTdkOC00MmYxLTk0YmEtZGQ4NmE5MTM3OTg0XkEyXkFqcGc@._V1_.jpg" alt="Fire Force" class="img-fluid rounded">
-              <div class="card-body text-center p-2">
-                <div class="stars mb-1" style="font-size: 0.85rem;">⭐️⭐️⭐️⭐️⯨</div>
-                <div class="text-danger" style="font-size: 1rem;">❤</div>
-              </div>
-            </div>
-          </div>
-
-           <div class="col">
-            <div class="card bg-anime text-white border-0" style="max-width: 160px;">
-              <img src="https://upload.wikimedia.org/wikipedia/pt/3/3b/A_Viagem_de_Chihiro.JPG" alt="chihiro" class="img-fluid rounded">
-              <div class="card-body text-center p-2">
-                <div class="stars mb-1" style="font-size: 0.85rem;">⭐⭐⭐⭐</div>
-                <div class="text-danger" style="font-size: 1rem;">❤</div>
-              </div>
-            </div>
-          </div>
-
-           <div class="col">
-            <div class="card bg-anime text-white border-0" style="max-width: 160px;">
-              <img src="https://images.justwatch.com/poster/102012613/s718/tokyo-ghoul.jpg" alt="Tokyo Ghoul" class="img-fluid rounded">
-              <div class="card-body text-center p-2">
-                <div class="stars mb-1" style="font-size: 0.85rem;">⭐⭐⭐⭐⭐</div>
-                <div class="text-danger" style="font-size: 1rem;">❤</div>
-              </div>
-            </div>
-          </div>
-
-           <div class="col">
-            <div class="card bg-anime text-white border-0" style="max-width: 160px;">
-              <img src="https://xonomax.com/cdn/shop/files/750407.jpg?v=1721570733" alt="tokyo Revengers" class="img-fluid rounded">
-              <div class="card-body text-center p-2">
-                <div class="stars mb-1" style="font-size: 0.85rem;">⭐⭐⭐⭐⭐</div>
-                <div class="text-danger" style="font-size: 1rem;">❤</div>
-              </div>
-            </div>
-          </div>
-
-           <div class="col">
-            <div class="card bg-anime text-white border-0" style="max-width: 160px;">
-              <img src="https://img.elo7.com.br/product/main/26A822C/big-poster-anime-demon-slayer-kimetsu-no-yaiba-lo12-90x60-cm-poster-anime.jpg" alt="Demon Slayer" class="img-fluid rounded">
-              <div class="card-body text-center p-2">
-                <div class="stars mb-1" style="font-size: 0.85rem;">⭐⭐⭐⭐⭐</div>
-                <div class="text-danger" style="font-size: 1rem;">❤</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card bg-anime text-white border-0" style="max-width: 160px;">
-              <img src="https://static.jojowiki.com/images/thumb/5/51/latest/20210407134012/JoJo%27s_Bizarre_Adventure_The_Animation_International_Poster.png/800px-JoJo%27s_Bizarre_Adventure_The_Animation_International_Poster.png" alt="Jojo" class="img-fluid rounded">
-              <div class="card-body text-center p-2">
-                <div class="stars mb-1" style="font-size: 0.85rem;">⭐⭐⭐⭐⯨</div>
-                <div class="text-danger" style="font-size: 1rem;">❤</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card bg-anime text-white border-0" style="max-width: 160px;">
-              <img src="https://a.storyblok.com/f/178900/750x1066/3f76801ffc/cr_aot_key.png/m/filters:quality(95)format(webp)" alt="Attack on Titan" class="img-fluid rounded">
-              <div class="card-body text-center p-2">
-                <div class="stars mb-1" style="font-size: 0.85rem;">⭐⭐⭐⭐⭐</div>
-                <div class="text-danger" style="font-size: 1rem;">❤</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card bg-anime text-white border-0" style="max-width: 160px;">
-              <img src="https://a.storyblok.com/f/178900/960x1440/0e7797b5d5/bluelockepisodenagi_2x3_2000x3000.jpg/m/filters:quality(95)format(webp)" alt="Blue Lock" class="img-fluid rounded">
-              <div class="card-body text-center p-2">
-                <div class="stars mb-1" style="font-size: 0.85rem;">⭐⭐⭐⭐⭐</div>
-                <div class="text-danger" style="font-size: 1rem;">❤</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card bg-anime text-white border-0" style="max-width: 160px;">
-              <img src="https://m.media-amazon.com/images/M/MV5BZDNmNzljMzEtOTM5Ny00NWU0LThkNTEtMzJlZDhjYjQxOTAxXkEyXkFqcGc@._V1_.jpg" alt="The Quintessential Quintuplets" class="img-fluid rounded">
-              <div class="card-body text-center p-2">
-                <div class="stars mb-1" style="font-size: 0.85rem;">⭐⭐⭐⭐⭐</div>
-                <div class="text-danger" style="font-size: 1rem;">❤</div>
-              </div>
-            </div>
+            </#list>
           </div>
         </div>
-      </div>
 
-      <div class="tab-pane fade" id="reviews" role="tabpanel">
-        <div class="text-center text-muted">
-          <p>No reviews favorited yet.</p>
+        <div class="tab-pane fade" id="reviews" role="tabpanel">
+          <div class="text-center text-muted">
+            <p>No reviews favorited yet.</p>
+          </div>
         </div>
-      </div>
 
-      
-      <div class="tab-pane fade" id="lists" role="tabpanel">
-        <div class="text-center text-muted">
-          <p>No lists favorited yet.</p>
+
+        <div class="tab-pane fade" id="lists" role="tabpanel">
+          <div class="text-center text-muted">
+            <p>No lists favorited yet.</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

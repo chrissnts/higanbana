@@ -52,7 +52,7 @@ public class AnimeController {
 
     public void editForm(Context ctx) {
         long id = Long.parseLong(ctx.pathParam("id"));
-        Anime anime = animeRepository.findById((int) id); 
+        Anime anime = animeRepository.findById((Long) id); 
         User currentUser = ctx.sessionAttribute("currentUser");
 
         Map<String, Object> model = animeRepository.getAnimeModel(currentUser);
@@ -89,7 +89,7 @@ public class AnimeController {
 
     public void view(Context ctx) {
         long id = Long.parseLong(ctx.pathParam("id"));
-        Anime anime = animeRepository.findById((int) id); 
+        Anime anime = animeRepository.findById((Long) id); 
         User currentUser = ctx.sessionAttribute("currentUser");
         Map<String, Object> model = animeRepository.getAnimeModel(currentUser);
         model.put("anime", anime);

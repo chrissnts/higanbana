@@ -16,19 +16,20 @@ public class Routes {
 
     public Routes() {
 
-        this.authController = new AuthenticationController();
-        UserDao userDao = new UserDao();
-        UserRepository userRepository = new UserRepositoryImpl(userDao);
-        this.userController = new UserController(userRepository);
-        AnimeDao animeDao = new AnimeDao();
         StudioDao studioDao = new StudioDao();
         GenreDao genreDao = new GenreDao();
+        AnimeDao animeDao = new AnimeDao();
+        UserDao userDao = new UserDao();
 
         StudioRepository studioRepository = new StudioRepositoryImpl(studioDao);
         GenreRepository genreRepository = new GenreRepositoryImpl(genreDao);
         AnimeRepository animeRepository = new AnimeRepositoryImpl(animeDao, studioRepository, genreRepository);
-        DashboardRepository dashboardRepository = new DashboardRepositoryImpl(userRepository, animeRepository,studioRepository, genreRepository);
+        UserRepository userRepository = new UserRepositoryImpl(userDao);
+        DashboardRepository dashboardRepository = new DashboardRepositoryImpl(userRepository, animeRepository,
+                studioRepository, genreRepository);
 
+        this.authController = new AuthenticationController();
+        this.userController = new UserController(userRepository, animeRepository);
         this.dashboardController = new DashboardController(dashboardRepository);
         this.animeController = new AnimeController(animeRepository);
         this.studioController = new StudioController(studioRepository);
@@ -36,7 +37,7 @@ public class Routes {
     }
 
     public void registerRoutes(Javalin app) {
-        
+
         // Landing Page
         app.get("/", ctx -> ctx.render("index.ftl"));
         app.get("/about", ctx -> ctx.render("home/about.ftl"));
@@ -52,8 +53,11 @@ public class Routes {
 
         // User
         app.get("/home", userController::home);
+        app.post("/favorites/add/{animeId}", userController::addFavorites);
         app.get("/favorites", userController::favorites);
-        
+        app.get("/animes", userController::animes);
+        app.get("/anime/{id}", userController::viewAnime);
+
         // Dashboard (admin)
         app.get("/dashboard", dashboardController::dashboard);
 
@@ -70,7 +74,6 @@ public class Routes {
         // app.post("/users/{id}/edit", userController::edit);
         app.get("/users/{id}/view", userController::view);
         app.post("/users/{id}/delete", userController::delete);
-        
 
         // Admin/studios
         app.get("/studios/create", studioController::createForm);

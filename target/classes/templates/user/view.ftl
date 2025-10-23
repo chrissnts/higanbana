@@ -22,8 +22,6 @@
             </h4>
 
             <div class="row g-4 align-items-start">
-
-                <!-- Detalhes do User -->
                 <div class="col-lg-8">
                     <ul class="list-group list-group-flush">
 

@@ -43,7 +43,7 @@ public class AnimeRepositoryImpl implements AnimeRepository {
     }
 
     @Override
-    public Anime findById(int id) {
+    public Anime findById(Long id) {
         return animeDao.findById(id);
     }
 

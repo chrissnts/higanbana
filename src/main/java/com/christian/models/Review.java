@@ -9,7 +9,7 @@ public class Review {
     private Anime anime;
     private User user;
     private String content;
-    private int rating;
+    private double rating;
     private LocalDateTime createdAt;
     private List<Comment> comments = new ArrayList<>();
 
@@ -57,14 +57,14 @@ public class Review {
         this.content = content;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
 
-        if (rating < 0 || rating > 10) {
-            throw new IllegalArgumentException("Rating must be between 0 and 10.");
+        if (rating < 0 || rating > 5) {
+            throw new IllegalArgumentException("Rating must be between 0 and 5.");
         }
         this.rating = rating;
     }

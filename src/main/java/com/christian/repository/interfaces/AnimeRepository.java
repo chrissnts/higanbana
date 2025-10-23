@@ -10,7 +10,7 @@ public interface AnimeRepository {
     void updateAnime(Anime anime);
     void deleteAnime(int id);
     int count();
-    Anime findById(int id);
+    Anime findById(Long animeId);
     List<Anime> getAllAnimes();
     List<Anime> searchAnimesByTitle(String title);
     Map<String, Object> getAnimeModel(User admin);

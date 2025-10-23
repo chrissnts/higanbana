@@ -110,7 +110,7 @@ public class AnimeDao {
         return 0;
     }
 
-    public Anime findById(int id) {
+    public Anime findById(Long id) {
         String sql = "SELECT a.*, s.id AS studio_id, s.name AS studio_name " +
                 "FROM animes a " +
                 "LEFT JOIN studios s ON a.studio_id = s.id " +
@@ -118,7 +118,7 @@ public class AnimeDao {
 
         try (Connection conn = DataBaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, id);
+            stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Anime anime = mapResultSetToAnime(rs);

@@ -15,78 +15,13 @@
 
 <body>
   
-  <nav class="navbar navbar-expand-lg py-2 px-3">
-    <div class="container-fluid">
+  <#include "../partials/navbaruser.ftl">
 
-      
-      <a class="navbar-brand d-flex align-items-center text-white" href="/home">
-        <img src="/img/tokyoFlower.png" alt="Logo" class="rounded-circle me-2" style="width:35px;height:35px;" />
-        <strong>Higanbana</strong>
-      </a>
-
-      
-      <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAnime"
-        aria-controls="navbarAnime" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-      <div class="collapse navbar-collapse" id="navbarAnime">
-        <ul class="navbar-nav ms-auto align-items-center mb-2 mb-lg-0">
-
-          <li class="nav-item me-3">
-            <a class="nav-link text-uppercase fw-bold text-white" href="/animes">ANIMES</a>
-          </li>
-
-          <li class="nav-item me-3">
-            <a class="nav-link text-uppercase fw-bold text-white" href="/watchlist">WATCHLIST</a>
-          </li>
-
-          <li class="nav-item me-3">
-            <button class="btn btn-danger btn-sm px-3 fw-bold">+ LOG</button>
-          </li>
-
-          
-          <form class="d-flex gap-2 my-2 me-4" role="search">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="width:150px;" />
-            <button class="btn btn-danger" type="submit">Search</button>
-          </form>
-
-          
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="navbarUser"
-              role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="${user.profileImage}" alt="Avatar" class="rounded-circle me-2" width="35" height="35" />
-              <span class="fw-bold text-uppercase">${user.userName}</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end text-white">
-              <li><a class="dropdown-item" href="/profile">Profile</a></li>
-              <li><a class="dropdown-item" href="/favorites">Favorites</a></li>
-              <li><a class="dropdown-item" href="/activity">Activity</a></li>
-              <li><a class="dropdown-item" href="/settings">Settings</a></li>
-              <hr>
-              <li>
-                <form action="/logout" method="post" class="d-inline">
-                  <button type="submit" class="dropdown-item">Sign Out</button>
-                </form>
-              </li>
-            </ul>
-          </li>
-
-        </ul>
-      </div>
-
-    </div>
-  </nav>
-
-  
-  
-  <main class="container text-center mt-4">
+  <main class="container text-center" style="margin-top: 100px;">
     <h2>Welcome, <a href="/profile" class="text-red fw-bold">${user.userName}</a></h2>
     <p class="text-muted">Look what your friends are watching...</p>
   </main>
 
-  
   <section class="container mt-5">
     <h5 class="text-white fw-bold">NEW FROM FRIENDS</h5>
     <hr class="text-white" />
@@ -94,8 +29,6 @@
     <div class="d-flex flex-row gap-3 overflow-auto px-2 py-3"
       style="background: linear-gradient(to right, #020202, #0a0a0a, #141414); box-shadow: 5px 5px 5px #000;">
 
-      <!-- Anime Card Template -->
-       <!-- lembra que todas as informaçoes vem do usuario -->
       <article class="card text-white p-2 d-flex flex-column align-items-center"
         style="width: 255px; height: 318px; background-color: #2a0404; cursor:pointer;">
         <img src="https://images-cdn.ubuy.co.in/633ff1157e3fbc25557517c8-one-piece-poster-japanese-anime-posters.jpg"

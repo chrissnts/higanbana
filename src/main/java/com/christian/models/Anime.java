@@ -149,4 +149,9 @@ public class Anime {
         }
         return sum / reviews.size();
     }
+
+    public void setFriendReviews(List<Review> friendReviews) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setFriendReviews'");
+    }
 }
