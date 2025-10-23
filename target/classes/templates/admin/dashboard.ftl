@@ -25,11 +25,6 @@
                     <div class="sidebar-item" data-target="animes"><i class="bi bi-film me-2"></i> Animes</div>
                     <div class="sidebar-item" data-target="studios"><i class="bi bi-building me-2"></i> Studios</div>
                     <div class="sidebar-item" data-target="genres"><i class="bi bi-tags-fill me-2"></i>Genres</div>
-                    <div class="sidebar-item" data-target="reviews"><i class="bi bi-chat-dots-fill me-2"></i> Reviews
-                    </div>
-                    <div class="sidebar-item" data-target="analytics"><i class="bi bi-bar-chart-fill me-2"></i>
-                        Analytics</div>
-                    <div class="sidebar-item" data-target="settings"><i class="bi bi-gear-fill me-2"></i> Settings</div>
                     <div class="sidebar-item" data-target="logout"><i class="bi bi-box-arrow-right me-2"></i> Logout
                     </div>
                 </div>
@@ -211,24 +206,8 @@
                         </div>
                     </div>
 
-                    <div class="card-content" id="reviews">
-                        <h5 class="fw-bold mb-3 text-uppercase">REVIEWS</h5>
-                        <p>Conteúdo de reviews aqui...</p>
-                    </div>
-
-                    <div class="card-content" id="analytics">
-                        <h5 class="fw-bold mb-3 text-uppercase">ANALYTICS</h5>
-                        <p>Conteúdo de analytics aqui...</p>
-                    </div>
-
-                    <div class="card-content" id="settings">
-                        <h5 class="fw-bold mb-3 text-uppercase">SETTINGS</h5>
-                        <p>Conteúdo de settings aqui...</p>
-                    </div>
-
                     <div class="card-content" id="logout">
                         <h5 class="fw-bold mb-3 text-uppercase">LOGOUT</h5>
-                        <p>Conteúdo de logout aqui...</p>
                     </div>
 
                 </div>

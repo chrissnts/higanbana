@@ -1,6 +1,7 @@
 package com.christian.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,10 @@ public class Anime {
     private Studio studio;
     private List<Genre> genres = new ArrayList<>();
     private List<Review> reviews = new ArrayList<>();
+    private LocalDateTime deletedAt;
 
-    public Anime(Long id, int episodesCount, String title, String synopsis, String imageUrl, double rating, LocalDate releaseDate, Studio studio, List<Genre> genres, List<Review> reviews) {
+    public Anime(Long id, int episodesCount, String title, String synopsis, String imageUrl, double rating,
+            LocalDate releaseDate, Studio studio, List<Genre> genres, List<Review> reviews, LocalDateTime deletedAt) {
         this.id = id;
         this.episodesCount = episodesCount;
         this.title = title;
@@ -27,20 +30,20 @@ public class Anime {
         this.studio = studio;
         this.genres = genres != null ? genres : new ArrayList<>();
         this.reviews = reviews != null ? reviews : new ArrayList<>();
+        this.deletedAt = deletedAt;
     }
-    
-    //so para usar de test na dashboard
+
+    // Construtor de teste
     public Anime(Long id, String title, int episodesCount, double rating) {
-    this.id = id;
-    this.title = title;
-    this.episodesCount = episodesCount;
-    this.rating = rating;
-}
+        this.id = id;
+        this.title = title;
+        this.episodesCount = episodesCount;
+        this.rating = rating;
+    }
 
     public Anime() {
     }
 
-    
     public Long getId() {
         return id;
     }
@@ -121,11 +124,19 @@ public class Anime {
         this.reviews = reviews;
     }
 
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
     @Override
     public String toString() {
         return "Anime [id=" + id + ", episodesCount=" + episodesCount + ", title=" + title + ", synopsis=" + synopsis
                 + ", imageUrl=" + imageUrl + ", rating=" + rating + ", releaseDate=" + releaseDate + ", studio="
-                + studio + ", genres=" + genres + ", reviews=" + reviews + "]";
+                + studio + ", genres=" + genres + ", reviews=" + reviews + ", deletedAt=" + deletedAt + "]";
     }
 
     public double getAverageRating() {
@@ -138,5 +149,4 @@ public class Anime {
         }
         return sum / reviews.size();
     }
-
 }

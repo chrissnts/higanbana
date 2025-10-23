@@ -1,9 +1,6 @@
 package com.christian.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.christian.database.DataBaseConnection;
@@ -14,9 +11,8 @@ public class UserDao {
 
     public void create(User user) {
         String sql = "INSERT INTO users (user_name, email, password, role_id, profile_image) VALUES (?,?,?,?,?)";
-
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, user.getUserName());
             stmt.setString(2, user.getEmail());
@@ -31,10 +27,9 @@ public class UserDao {
     }
 
     public void update(User user) {
-        String sql = "UPDATE users SET user_name = ?, email = ?, password = ?, role_id = ?, profile_image = ? WHERE id = ?";
-
+        String sql = "UPDATE users SET user_name = ?, email = ?, password = ?, role_id = ?, profile_image = ? WHERE id = ? AND deleted_at IS NULL";
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, user.getUserName());
             stmt.setString(2, user.getEmail());
@@ -49,11 +44,25 @@ public class UserDao {
         }
     }
 
+    // 🔹 Soft delete
     public void delete(int id) {
-        String sql = "DELETE FROM users WHERE id = ?";
-
+        String sql = "UPDATE users SET deleted_at = NOW() WHERE id = ?";
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 🔹 Restaurar usuário (opcional)
+    public void restore(int id) {
+        String sql = "UPDATE users SET deleted_at = NULL WHERE id = ?";
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -64,10 +73,9 @@ public class UserDao {
     }
 
     public User findById(int id) {
-        String sql = "SELECT * FROM users WHERE id = ?";
-
+        String sql = "SELECT * FROM users WHERE id = ? AND deleted_at IS NULL";
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -82,10 +90,10 @@ public class UserDao {
     }
 
     public int count() {
-        String sql = "SELECT COUNT(*) AS total FROM users WHERE role_id != 1";
+        String sql = "SELECT COUNT(*) AS total FROM users WHERE role_id != 1 AND deleted_at IS NULL";
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             if (rs.next()) {
                 return rs.getInt("total");
@@ -98,11 +106,11 @@ public class UserDao {
     }
 
     public List<User> findAll() {
-        String sql = "SELECT * FROM users WHERE role_id != 1";
+        String sql = "SELECT * FROM users WHERE role_id != 1 AND deleted_at IS NULL";
         List<User> users = new ArrayList<>();
 
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -116,10 +124,9 @@ public class UserDao {
     }
 
     public User findByEmail(String email) {
-        String sql = "SELECT * FROM users WHERE email = ?";
-
+        String sql = "SELECT * FROM users WHERE email = ? AND deleted_at IS NULL";
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
@@ -140,9 +147,12 @@ public class UserDao {
         user.setEmail(rs.getString("email"));
         user.setPassword(rs.getString("password"));
         user.setProfileImage(rs.getString("profile_image"));
+        user.setRole(Role.fromId(rs.getInt("role_id")));
 
-        int roleId = rs.getInt("role_id");
-        user.setRole(Role.fromId(roleId));
+        Timestamp deletedAt = rs.getTimestamp("deleted_at");
+        if (deletedAt != null) {
+            user.setDeletedAt(deletedAt.toLocalDateTime());
+        }
 
         return user;
     }

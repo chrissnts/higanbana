@@ -37,7 +37,7 @@ public class GenreDao {
     }
 
     public void delete(int id) {
-        String sql = "DELETE FROM genres WHERE id = ?";
+        String sql = "UPDATE genres SET deleted_at = NOW() WHERE id = ?";
         try (Connection conn = DataBaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -50,14 +50,13 @@ public class GenreDao {
     }
 
     public int count() {
-        String sql = "SELECT COUNT(*) AS total FROM genres";
+        String sql = "SELECT COUNT(*) AS total FROM genres WHERE deleted_at IS NULL";
         try (Connection conn = DataBaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 ResultSet rs = stmt.executeQuery()) {
 
-            if (rs.next()) {
+            if (rs.next())
                 return rs.getInt("total");
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,15 +65,14 @@ public class GenreDao {
     }
 
     public Genre findById(int id) {
-        String sql = "SELECT * FROM genres WHERE id = ?";
+        String sql = "SELECT * FROM genres WHERE id = ? AND deleted_at IS NULL";
         try (Connection conn = DataBaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
+            if (rs.next())
                 return mapResultSetToGenre(rs);
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,21 +80,21 @@ public class GenreDao {
         return null;
     }
 
-    public Genre findByName(String name) {
-        String sql = "SELECT * FROM genres WHERE name = ?";
+    public List<Genre> findAll() {
+        String sql = "SELECT * FROM genres WHERE deleted_at IS NULL ORDER BY name ASC";
+        List<Genre> genres = new ArrayList<>();
+
         try (Connection conn = DataBaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, name);
             ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return mapResultSetToGenre(rs);
-            }
+            while (rs.next())
+                genres.add(mapResultSetToGenre(rs));
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return genres;
     }
 
     public Genre findByIdWithAnimes(int id) {
@@ -104,7 +102,7 @@ public class GenreDao {
         String sqlAnimes = "SELECT a.* " +
                 "FROM animes a " +
                 "JOIN anime_genres ag ON a.id = ag.anime_id " +
-                "WHERE ag.genre_id = ? " +
+                "WHERE ag.genre_id = ? AND a.deleted_at IS NULL " +
                 "ORDER BY a.title ASC";
 
         Genre genre = null;
@@ -152,45 +150,15 @@ public class GenreDao {
         return genre;
     }
 
-    public boolean existsByName(String name) {
-        String sql = "SELECT COUNT(*) FROM genres WHERE name = ?";
-        try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, name);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public List<Genre> findAll() {
-        String sql = "SELECT * FROM genres ORDER BY name ASC";
-        List<Genre> genres = new ArrayList<>();
-
-        try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                genres.add(mapResultSetToGenre(rs));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return genres;
-    }
-
     private Genre mapResultSetToGenre(ResultSet rs) throws SQLException {
         Genre genre = new Genre();
-        genre.setId(rs.getInt("id"));
+        genre.setId(rs.getLong("id"));
         genre.setName(rs.getString("name"));
+
+        Timestamp deletedAt = rs.getTimestamp("deleted_at");
+        if (deletedAt != null)
+            genre.setDeletedAt(deletedAt.toLocalDateTime());
+
         return genre;
     }
 }

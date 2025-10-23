@@ -37,7 +37,7 @@ public class StudioDao {
     }
 
     public void delete(int id) {
-        String sql = "DELETE FROM studios WHERE id = ?";
+        String sql = "UPDATE studios SET deleted_at = NOW() WHERE id = ?";
         try (Connection conn = DataBaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -50,14 +50,13 @@ public class StudioDao {
     }
 
     public int count() {
-        String sql = "SELECT COUNT(*) AS total FROM studios";
+        String sql = "SELECT COUNT(*) AS total FROM studios WHERE deleted_at IS NULL";
         try (Connection conn = DataBaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 ResultSet rs = stmt.executeQuery()) {
 
-            if (rs.next()) {
+            if (rs.next())
                 return rs.getInt("total");
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,67 +65,31 @@ public class StudioDao {
     }
 
     public Studio findById(int id) {
-        String sql = "SELECT * FROM studios WHERE id = ?";
+        String sql = "SELECT * FROM studios WHERE id = ? AND deleted_at IS NULL";
         try (Connection conn = DataBaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
+            if (rs.next())
                 return mapResultSetToStudio(rs);
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public Studio findByName(String name) {
-        String sql = "SELECT * FROM studios WHERE name = ?";
-        try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, name);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return mapResultSetToStudio(rs);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public boolean existsByName(String name) {
-        String sql = "SELECT COUNT(*) FROM studios WHERE name = ?";
-        try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, name);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     public List<Studio> findAll() {
-        String sql = "SELECT * FROM studios ORDER BY name ASC";
+        String sql = "SELECT * FROM studios WHERE deleted_at IS NULL ORDER BY name ASC";
         List<Studio> studios = new ArrayList<>();
 
         try (Connection conn = DataBaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
+            while (rs.next())
                 studios.add(mapResultSetToStudio(rs));
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -136,12 +99,10 @@ public class StudioDao {
 
     public Studio findByIdWithAnimes(int id) {
         String sqlStudio = "SELECT * FROM studios WHERE id = ?";
-        String sqlAnimes = "SELECT * FROM animes WHERE studio_id = ? ORDER BY title ASC";
-
+        String sqlAnimes = "SELECT * FROM animes WHERE studio_id = ? AND deleted_at IS NULL ORDER BY title ASC";
         Studio studio = null;
 
         try (Connection conn = DataBaseConnection.getConnection()) {
-
 
             try (PreparedStatement stmt = conn.prepareStatement(sqlStudio)) {
                 stmt.setInt(1, id);
@@ -149,7 +110,7 @@ public class StudioDao {
                 if (rs.next()) {
                     studio = mapResultSetToStudio(rs);
                 } else {
-                    return null; 
+                    return null;
                 }
             }
 
@@ -186,8 +147,13 @@ public class StudioDao {
 
     private Studio mapResultSetToStudio(ResultSet rs) throws SQLException {
         Studio studio = new Studio();
-        studio.setId(rs.getInt("id"));
+        studio.setId(rs.getLong("id"));
         studio.setName(rs.getString("name"));
+
+        Timestamp deletedAt = rs.getTimestamp("deleted_at");
+        if (deletedAt != null)
+            studio.setDeletedAt(deletedAt.toLocalDateTime());
+
         return studio;
     }
 }

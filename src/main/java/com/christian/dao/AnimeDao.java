@@ -1,6 +1,7 @@
 package com.christian.dao;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class AnimeDao {
         String sql = "INSERT INTO animes (title, episodes_count, synopsis, image_url, rating, release_date, studio_id) VALUES (?,?,?,?,?,?,?)";
 
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, anime.getTitle());
             stmt.setInt(2, anime.getEpisodesCount());
@@ -43,7 +44,7 @@ public class AnimeDao {
         String sql = "UPDATE animes SET title = ?, episodes_count = ?, synopsis = ?, image_url = ?, rating = ?, release_date = ?, studio_id = ? WHERE id = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, anime.getTitle());
             stmt.setInt(2, anime.getEpisodesCount());
@@ -66,11 +67,24 @@ public class AnimeDao {
 
     public void delete(int id) {
         deleteAnimeGenres(id);
-
-        String sql = "DELETE FROM animes WHERE id = ?";
+        String sql = "UPDATE animes SET deleted_at = NOW() WHERE id = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void restore(int id) {
+        String sql = "UPDATE animes SET deleted_at = NULL WHERE id = ?";
+
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -81,10 +95,10 @@ public class AnimeDao {
     }
 
     public int count() {
-        String sql = "SELECT COUNT(*) AS total FROM animes";
+        String sql = "SELECT COUNT(*) AS total FROM animes WHERE deleted_at IS NULL";
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             if (rs.next()) {
                 return rs.getInt("total");
@@ -100,10 +114,10 @@ public class AnimeDao {
         String sql = "SELECT a.*, s.id AS studio_id, s.name AS studio_name " +
                 "FROM animes a " +
                 "LEFT JOIN studios s ON a.studio_id = s.id " +
-                "WHERE a.id = ?";
+                "WHERE a.id = ? AND a.deleted_at IS NULL";
 
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -121,11 +135,12 @@ public class AnimeDao {
     public List<Anime> findAll() {
         String sql = "SELECT a.*, s.id AS studio_id, s.name AS studio_name " +
                 "FROM animes a " +
-                "LEFT JOIN studios s ON a.studio_id = s.id";
+                "LEFT JOIN studios s ON a.studio_id = s.id " +
+                "WHERE a.deleted_at IS NULL";
         List<Anime> animes = new ArrayList<>();
 
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -144,11 +159,11 @@ public class AnimeDao {
         String sql = "SELECT a.*, s.id AS studio_id, s.name AS studio_name " +
                 "FROM animes a " +
                 "LEFT JOIN studios s ON a.studio_id = s.id " +
-                "WHERE LOWER(a.title) LIKE LOWER(?)";
+                "WHERE LOWER(a.title) LIKE LOWER(?) AND a.deleted_at IS NULL";
         List<Anime> animes = new ArrayList<>();
 
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, "%" + title + "%");
             ResultSet rs = stmt.executeQuery();
@@ -178,6 +193,11 @@ public class AnimeDao {
             anime.setReleaseDate(releaseDate.toLocalDate());
         }
 
+        Timestamp deletedAt = rs.getTimestamp("deleted_at");
+        if (deletedAt != null) {
+            anime.setDeletedAt(deletedAt.toLocalDateTime());
+        }
+
         Studio studio = new Studio();
         studio.setId(rs.getLong("studio_id"));
         studio.setName(rs.getString("studio_name"));
@@ -194,7 +214,7 @@ public class AnimeDao {
                 "WHERE ag.anime_id = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setLong(1, animeId);
             ResultSet rs = stmt.executeQuery();
@@ -217,7 +237,7 @@ public class AnimeDao {
         String sql = "INSERT INTO anime_genres (anime_id, genre_id) VALUES (?, ?)";
 
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             for (Genre genre : anime.getGenres()) {
                 stmt.setLong(1, anime.getId());
@@ -235,7 +255,7 @@ public class AnimeDao {
         String sql = "DELETE FROM anime_genres WHERE anime_id = ?";
 
         try (Connection conn = DataBaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setLong(1, animeId);
             stmt.executeUpdate();

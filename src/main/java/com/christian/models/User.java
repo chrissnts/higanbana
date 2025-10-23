@@ -1,5 +1,6 @@
 package com.christian.models;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +13,8 @@ public class User {
     private String password;
     private Role role;
     private String profileImage;
+    private LocalDateTime deletedAt;
+
     private List<Anime> watchedAnimes = new ArrayList<>();
     private List<Anime> watchlistAnime = new ArrayList<>();
     private List<Review> reviews = new ArrayList<>();
@@ -19,19 +22,7 @@ public class User {
     private List<User> friends = new ArrayList<>();
     private List<Anime> favoriteAnimes = new ArrayList<>();
 
-    public User(Long id, String userName, String email, String password, Role role, List<Anime> watchedAnimes, List<Anime> watchlistAnime,List<Review> reviews, List<Comment> comments,List<User> friends, List<Anime> favoriteAnimes) {
-        this.id = id;
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.watchedAnimes = watchedAnimes;
-        this.watchlistAnime = watchlistAnime;
-        this.reviews = reviews;
-        this.comments = comments;
-        this.friends = friends;
-        this.favoriteAnimes = favoriteAnimes;
-
+    public User() {
     }
 
     public User(String userName, String email, String password, Role role) {
@@ -39,9 +30,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.role = role;
-    }
-
-    public User() {
     }
 
     public Long getId() {
@@ -90,6 +78,14 @@ public class User {
 
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 
     public List<Anime> getWatchedAnimes() {
